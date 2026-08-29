@@ -1,0 +1,27 @@
+{
+  "slug": "crucial-x9-4tb",
+  "demo": false,
+  "titleHe": "Crucial X9 נייד 4TB",
+  "titleEn": "Crucial X9 Portable SSD 4TB",
+  "brand": "Crucial",
+  "category": "storage",
+  "model": "CT4000X9SSD9",
+  "image": "/images/deals/crucial-x9-4tb.svg",
+  "imageAltHe": "כונן SSD נייד Crucial X9 בנפח 4 טרה־בייט",
+  "storeUrl": "https://www.amazon.com/dp/B0CGVZL1M1",
+  "storeName": "Amazon US",
+  "priceUsd": 219.99,
+  "listPriceUsd": 279.99,
+  "landedIls": 899,
+  "compareIls": 1190,
+  "shippingNoteHe": "דגם X9 הרגיל (לא Pro). USB-C עד כ־1050MB/s.",
+  "summaryHe": "SSD נייד של Crucial בנפח 4TB, חיבור USB-C 10Gbps, עמיד למכות ונפילות. דיל יבוא כשהמחיר לטרה בארה״ב נמוך משמעותית מהמקומי.",
+  "highlightsHe": [
+    "4TB, דגם CT4000X9SSD9",
+    "עד כ־1050MB/s קריאה",
+    "USB-C, תואם PC / Mac / קונסולות",
+    "קומפקטי ועמיד לזעזועים"
+  ],
+  "publishedAt": "2026-08-16",
+  "featured": true
+}

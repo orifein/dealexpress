@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img">
+
+  <rect width="800" height="600" fill="#F4F7FB"/>
+  <g fill="#FFFFFF" stroke="#1B4F8A" stroke-width="3">
+    <ellipse cx="220" cy="300" rx="36" ry="70"/>
+    <ellipse cx="310" cy="300" rx="36" ry="70"/>
+    <ellipse cx="400" cy="300" rx="36" ry="70"/>
+    <ellipse cx="490" cy="300" rx="36" ry="70"/>
+    <ellipse cx="580" cy="300" rx="36" ry="70"/>
+  </g>
+  <text x="400" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#0A1B33" font-weight="700">ORAL-B iO</text>
+  <text x="400" y="110" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#5A6570">Gentle Cleaning · White · 10</text>
+
+</svg>

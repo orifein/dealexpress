@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img">
+
+  <rect width="800" height="600" fill="#F6E7C8"/>
+  <rect x="80" y="200" width="130" height="260" fill="#8B2E2E"/>
+  <rect x="230" y="160" width="150" height="300" fill="#C9A227"/>
+  <rect x="400" y="180" width="140" height="280" fill="#2F4A7A"/>
+  <rect x="560" y="150" width="160" height="310" fill="#6B3FA0"/>
+  <rect x="100" y="240" width="40" height="50" fill="#F3E6B3"/>
+  <rect x="150" y="240" width="40" height="50" fill="#F3E6B3"/>
+  <rect x="260" y="200" width="40" height="50" fill="#FFF4C2"/>
+  <rect x="320" y="200" width="40" height="50" fill="#FFF4C2"/>
+  <rect x="430" y="220" width="40" height="50" fill="#D7E4F7"/>
+  <rect x="490" y="220" width="40" height="50" fill="#D7E4F7"/>
+  <rect x="590" y="190" width="40" height="50" fill="#E8D6FF"/>
+  <rect x="650" y="190" width="40" height="50" fill="#E8D6FF"/>
+  <rect x="80" y="460" width="640" height="18" fill="#3A2A1A"/>
+  <text x="400" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#0A1B33" font-weight="700">LEGO 76444</text>
+  <text x="400" y="110" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#5A6570">Diagon Alley Wizarding Shops</text>
+
+</svg>

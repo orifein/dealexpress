@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img">
+
+  <rect width="800" height="600" fill="#E8EEF2"/>
+  <rect x="140" y="220" width="520" height="180" rx="16" fill="#22303A"/>
+  <g fill="#E8A317">
+    <rect x="170" y="250" width="40" height="40" rx="6"/>
+    <rect x="220" y="250" width="40" height="40" rx="6"/>
+    <rect x="270" y="250" width="40" height="40" rx="6"/>
+    <rect x="320" y="250" width="40" height="40" rx="6"/>
+    <rect x="370" y="250" width="40" height="40" rx="6"/>
+    <rect x="420" y="250" width="40" height="40" rx="6"/>
+    <rect x="470" y="250" width="40" height="40" rx="6"/>
+    <rect x="520" y="250" width="40" height="40" rx="6"/>
+  </g>
+  <text x="400" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="#22303A" font-weight="700">DEMO</text>
+
+</svg>

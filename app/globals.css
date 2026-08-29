@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f6f1e8;
+  --ink: #122033;
+  --navy: #0a1b33;
+  --gold: #e8a317;
+  --muted: #5a6570;
+  --card: #ffffff;
+  --line: #e4dccf;
+  --danger: #c43b1e;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-navy: var(--navy);
+  --color-gold: var(--gold);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-heebo);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-heebo), Arial, sans-serif;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}

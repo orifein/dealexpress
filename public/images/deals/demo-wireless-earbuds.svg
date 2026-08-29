@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img">
+
+  <rect width="800" height="600" fill="#F0E9F6"/>
+  <circle cx="320" cy="300" r="70" fill="#6B3FA0"/>
+  <circle cx="480" cy="300" r="70" fill="#6B3FA0"/>
+  <path d="M320 230c40-70 120-70 160 0" fill="none" stroke="#6B3FA0" stroke-width="10"/>
+  <text x="400" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="#6B3FA0" font-weight="700">DEMO</text>
+
+</svg>

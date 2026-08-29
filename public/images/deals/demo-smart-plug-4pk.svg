@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img">
+
+  <rect width="800" height="600" fill="#EEF1F7"/>
+  <g fill="#0A1B33">
+    <rect x="200" y="230" width="80" height="120" rx="16"/>
+    <rect x="310" y="230" width="80" height="120" rx="16"/>
+    <rect x="420" y="230" width="80" height="120" rx="16"/>
+    <rect x="530" y="230" width="80" height="120" rx="16"/>
+  </g>
+  <text x="400" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="#0A1B33" font-weight="700">DEMO</text>
+
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img">
+
+  <rect width="800" height="600" fill="#F3F0EA"/>
+  <ellipse cx="400" cy="430" rx="250" ry="28" fill="#D9D3C7"/>
+  <path d="M170 360c40-70 120-120 250-130 90-8 180 20 250 70 20 14 40 40 30 62-80 20-200 34-320 30-90-3-160-12-210-32z" fill="#111111"/>
+  <path d="M210 340c50-40 140-70 230-66 70 3 140 28 200 62-70 12-160 22-250 18-70-3-130-8-180-14z" fill="#F7F7F7"/>
+  <path d="M250 300c30-24 80-40 140-38 20 18 10 40-8 52-40 8-90 10-132-14z" fill="#1A1A1A"/>
+  <rect x="360" y="250" width="70" height="18" rx="4" fill="#E8A317"/>
+  <text x="400" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#0A1B33" font-weight="700">REEBOK SHADORAY</text>
+  <text x="400" y="110" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#5A6570">Black / White · US 9</text>
+
+</svg>

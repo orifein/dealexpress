@@ -1,0 +1,18 @@
+{
+  "slug": "demo-mechanical-keyboard",
+  "demo": true,
+  "titleHe": "מקלדת מכנית — דוגמת תצוגה",
+  "titleEn": "Demo mechanical keyboard",
+  "brand": "DEAL EXPRESS",
+  "category": "gaming",
+  "image": "/images/deals/demo-mechanical-keyboard.svg",
+  "imageAltHe": "איור דוגמה של מקלדת מכנית",
+  "storeUrl": "",
+  "storeName": "",
+  "landedIls": 399,
+  "compareIls": 549,
+  "summaryHe": "כרטיס דוגמה בלבד. לא דיל אמיתי ואין קישור חנות.",
+  "highlightsHe": ["demo:true", "ללא קישור שותפים", "משמש לבדיקת עיצוב הכרטיס"],
+  "publishedAt": "2026-07-02",
+  "featured": false
+}

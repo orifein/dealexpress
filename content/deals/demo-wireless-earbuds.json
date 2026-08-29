@@ -1,0 +1,18 @@
+{
+  "slug": "demo-wireless-earbuds",
+  "demo": true,
+  "titleHe": "אוזניות אלחוטיות — דוגמת תצוגה",
+  "titleEn": "Demo wireless earbuds",
+  "brand": "DEAL EXPRESS",
+  "category": "accessories",
+  "image": "/images/deals/demo-wireless-earbuds.svg",
+  "imageAltHe": "איור דוגמה של אוזניות אלחוטיות",
+  "storeUrl": "",
+  "storeName": "",
+  "landedIls": 219,
+  "compareIls": 349,
+  "summaryHe": "כרטיס דוגמה בלבד. לא דיל אמיתי ואין קישור חנות.",
+  "highlightsHe": ["demo:true", "ללא קישור שותפים", "משמש לבדיקת עיצוב הכרטיס"],
+  "publishedAt": "2026-07-01",
+  "featured": false
+}
