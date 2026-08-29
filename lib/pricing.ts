@@ -5,15 +5,12 @@ export function hasLandedPrice(deal: Deal): boolean {
 }
 
 export function primaryPriceLabel(deal: Deal): {
-  kind: "landed" | "usd" | "none";
+  kind: "landed" | "none";
   labelHe: string;
   value?: string;
 } {
   if (hasLandedPrice(deal) && deal.landedIls != null) {
     return { kind: "landed", labelHe: "מחיר סופי", value: String(deal.landedIls) };
-  }
-  if (typeof deal.priceUsd === "number") {
-    return { kind: "usd", labelHe: "מחיר בחנות", value: String(deal.priceUsd) };
   }
   return { kind: "none", labelHe: "מחיר בהמשך" };
 }

@@ -15,9 +15,6 @@ export default function TermsPage() {
         הזמנה.
       </p>
       <p>{site.usdIlsNoteHe}</p>
-      <p>
-        דוגמאות תצוגה מסומנות במפורש ואינן הצעת מכירה. אין להסתמך עליהן לקנייה.
-      </p>
       <p>{site.affiliatePolicyHe}</p>
     </div>
   );

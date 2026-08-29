@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function DealsPage() {
   return (
     <>
-      <PageHero title="כל הדילים" subtitle="אמיתיים ודוגמאות תצוגה במקום אחד." />
+      <PageHero title="כל הדילים" subtitle="המחיר הסופי בשקלים קודם. לוחצים וקונים." />
       <DealGrid deals={getAllDeals()} />
     </>
   );

@@ -2,7 +2,7 @@ import { DealGrid } from "@/components/DealGrid";
 import { FollowFacebook } from "@/components/FollowFacebook";
 import { PageHero } from "@/components/PageHero";
 import { missingRealDeals } from "@/lib/assert-deals";
-import { getDemoDeals, getRealDeals } from "@/lib/deals";
+import { getRealDeals } from "@/lib/deals";
 import { site } from "@/lib/site";
 
 export default function HomePage() {
@@ -10,9 +10,6 @@ export default function HomePage() {
   if (missing.length > 0) {
     throw new Error(`חסרים דילים אמיתיים: ${missing.join(", ")}`);
   }
-
-  const realDeals = getRealDeals();
-  const demoDeals = getDemoDeals();
 
   return (
     <div className="space-y-12">
@@ -31,15 +28,7 @@ export default function HomePage() {
 
       <section>
         <PageHero title="הדילים עכשיו" subtitle="המחיר הסופי בשקלים קודם. לוחצים וקונים." />
-        <DealGrid deals={realDeals} empty="עדיין אין דילים אמיתיים." />
-      </section>
-
-      <section>
-        <PageHero
-          title="דוגמאות תצוגה"
-          subtitle="שישה כרטיסי דמו לבדיקת העיצוב. לא לקנייה."
-        />
-        <DealGrid deals={demoDeals} />
+        <DealGrid deals={getRealDeals()} empty="עדיין אין דילים אמיתיים." />
       </section>
     </div>
   );
