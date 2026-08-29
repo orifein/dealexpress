@@ -7,7 +7,7 @@ type DealImageProps = {
 
 export function DealImage({ src, alt, className, priority }: DealImageProps) {
   return (
-    // Local original SVGs — keep native img to avoid next/image SVG restrictions.
+    // Local merchant photos and demo SVGs.
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}

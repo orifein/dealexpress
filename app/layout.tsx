@@ -12,7 +12,7 @@ const heebo = Heebo({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.brandEn} · ${site.brandHe}`,
+    default: `${site.brandHe} — כי בארץ זה סתם יקר`,
     template: `%s · ${site.brandEn}`,
   },
   description: site.descriptionHe,

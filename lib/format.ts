@@ -14,6 +14,13 @@ export function formatIls(amount: number): string {
   return ilsFormatter.format(amount);
 }
 
+export function formatApproxIls(amount: number): string {
+  const n = new Intl.NumberFormat("he-IL", { maximumFractionDigits: 0 }).format(
+    amount,
+  );
+  return `~₪${n}`;
+}
+
 export function formatUsd(amount: number): string {
   return usdFormatter.format(amount);
 }

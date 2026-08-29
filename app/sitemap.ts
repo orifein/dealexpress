@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const deals = getAllDeals().map((deal) => ({
-    url: `https://dealexpress.local/deals/${deal.slug}`,
+    url: `https://dealexpress.local/deal/${deal.slug}`,
     lastModified: new Date(deal.publishedAt),
   }));
 

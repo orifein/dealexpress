@@ -10,15 +10,11 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="max-w-3xl space-y-6 text-lg leading-8">
-      <PageHero title={`על ${site.brandEn}`} subtitle={site.brandHe} />
+      <PageHero title={`על ${site.brandEn}`} subtitle={site.taglineHe} />
       <p>{site.descriptionHe}</p>
       <p>
-        העורך הוא {site.ownerNameHe}, {site.ownerRoleHe}. הוא בוחר את הדילים,
-        כותב את העברית, ומחשב מחיר נחת בשקלים כשאפשר.
-      </p>
-      <p>
-        כשיש שדה <span dir="ltr">landedIls</span> — זה המחיר הראשי על הכרטיס.
-        מחיר הדולר בחנות נשאר משני, כדי שתראו קודם כמה זה באמת עולה עד הבית.
+        כשיש מחיר סופי משוער בשקלים — הוא מוצג ראשון על הכרטיס, עם סימן ~ כי זו
+        הערכה עד הבית.
       </p>
       <p>{site.affiliatePolicyHe}</p>
       <FollowFacebook />

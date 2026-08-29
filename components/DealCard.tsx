@@ -6,13 +6,15 @@ import { categoryLabelsHe } from "@/lib/categories";
 import type { Deal } from "@/types/deal";
 
 export function DealCard({ deal }: { deal: Deal }) {
+  const href = `/deal/${deal.slug}`;
+
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
-      <Link href={`/deals/${deal.slug}`} className="relative block aspect-[4/3] bg-paper">
+      <Link href={href} className="relative block aspect-[4/3] bg-white">
         <DealImage
           src={deal.image}
           alt={deal.imageAltHe}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain p-3"
         />
         <div className="absolute start-3 top-3 flex gap-2">
           {deal.demo ? <DemoBadge /> : null}
@@ -27,14 +29,14 @@ export function DealCard({ deal }: { deal: Deal }) {
             {deal.brand}
           </p>
           <h2 className="mt-1 text-lg font-bold leading-snug">
-            <Link href={`/deals/${deal.slug}`} className="hover:text-gold">
+            <Link href={href} className="hover:text-gold">
               {deal.titleHe}
             </Link>
           </h2>
         </div>
         <PriceStack deal={deal} />
         <Link
-          href={`/deals/${deal.slug}`}
+          href={href}
           className="mt-auto text-sm font-semibold text-navy underline decoration-gold"
         >
           פרטי הדיל

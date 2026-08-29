@@ -24,16 +24,13 @@ export default function HomePage() {
           {site.taglineHe}
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-paper/80">{site.descriptionHe}</p>
-        <p className="mt-3 text-sm text-paper/70">
-          עריכה: {site.ownerNameHe}. כשיש מחיר נחת — הוא מוצג ראשון בכרטיס.
-        </p>
         <div className="mt-6">
           <FollowFacebook />
         </div>
       </section>
 
       <section>
-        <PageHero title="הדילים עכשיו" subtitle="שמונה דילים אמיתיים. בלי מזהי שותפים מומצאים." />
+        <PageHero title="הדילים עכשיו" subtitle="המחיר הסופי בשקלים קודם. לוחצים וקונים." />
         <DealGrid deals={realDeals} empty="עדיין אין דילים אמיתיים." />
       </section>
 

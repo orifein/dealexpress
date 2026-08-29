@@ -10,7 +10,7 @@
   "storeUrl": "",
   "storeName": "",
   "priceUsd": 42,
-  "summaryHe": "כרטיס דוגמה בלי מחיר נחת — בודק נפילה למחיר דולרי.",
+  "summaryHe": "כרטיס דוגמה בלי מחיר סופי — בודק נפילה למחיר דולרי.",
   "highlightsHe": ["demo:true", "אין landedIls", "מחיר דולרי משני"],
   "publishedAt": "2026-07-04",
   "featured": false

@@ -1,8 +1,8 @@
-import { cleanStoreUrl } from "@/lib/affiliate";
+import { affiliateUrl } from "@/lib/affiliate";
 import type { Deal } from "@/types/deal";
 
 export function StoreCta({ deal }: { deal: Deal }) {
-  const href = cleanStoreUrl(deal.storeUrl);
+  const href = affiliateUrl(deal.storeUrl);
 
   if (deal.demo || !href) {
     return (
@@ -16,10 +16,10 @@ export function StoreCta({ deal }: { deal: Deal }) {
     <a
       href={href}
       className="inline-flex items-center justify-center rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-paper hover:bg-ink"
-      rel="noopener noreferrer nofollow"
+      rel="noopener noreferrer sponsored"
       target="_blank"
     >
-      מעבר ל־{deal.storeName || "החנות"}
+      לקנייה ב־{deal.storeName || "החנות"}
     </a>
   );
 }

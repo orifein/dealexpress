@@ -10,9 +10,6 @@ export function SiteFooter() {
         <div className="max-w-md space-y-3">
           <p className="font-bold tracking-[0.14em]">{site.brandEn}</p>
           <p>{site.descriptionHe}</p>
-          <p className="text-sm text-paper/80">
-            תוכן ומחירי נחת בעריכת {site.ownerNameHe}, {site.ownerRoleHe}.
-          </p>
           <p className="text-sm text-paper/80">{site.affiliatePolicyHe}</p>
         </div>
         <div className="space-y-3 text-sm">

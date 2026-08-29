@@ -10,7 +10,7 @@ export function primaryPriceLabel(deal: Deal): {
   value?: string;
 } {
   if (hasLandedPrice(deal) && deal.landedIls != null) {
-    return { kind: "landed", labelHe: "מחיר נחת", value: String(deal.landedIls) };
+    return { kind: "landed", labelHe: "מחיר סופי", value: String(deal.landedIls) };
   }
   if (typeof deal.priceUsd === "number") {
     return { kind: "usd", labelHe: "מחיר בחנות", value: String(deal.priceUsd) };

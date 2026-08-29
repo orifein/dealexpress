@@ -9,11 +9,11 @@ import type { Deal } from "@/types/deal";
 export function DealHero({ deal }: { deal: Deal }) {
   return (
     <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-line bg-card">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-line bg-white">
         <DealImage
           src={deal.image}
           alt={deal.imageAltHe}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain p-6"
           priority
         />
       </div>

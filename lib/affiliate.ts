@@ -1,17 +1,30 @@
-/** Outbound store links must stay clean. Never invent or inject affiliate IDs. */
+/** Real DEAL EXPRESS affiliate IDs only. Never invent tags. Never strip these. */
 
-const blockedParams = ["tag", "ascsubtag", "linkCode", "linkId", "ref_", "asc_campaign"];
+const AMAZON_COM_TAG = "dealexpress20-20";
+const AMAZON_DE_TAG = "dealexpress21-21";
+const IHERB_RCODE = "DBO0874";
 
-export function cleanStoreUrl(url: string): string {
+function hostOf(hostname: string): string {
+  return hostname.toLowerCase().replace(/^www\./, "");
+}
+
+export function affiliateUrl(url: string): string {
   if (!url) {
     return "";
   }
 
   try {
     const parsed = new URL(url);
-    for (const key of blockedParams) {
-      parsed.searchParams.delete(key);
+    const host = hostOf(parsed.hostname);
+
+    if (host === "amazon.com") {
+      parsed.searchParams.set("tag", AMAZON_COM_TAG);
+    } else if (host === "amazon.de") {
+      parsed.searchParams.set("tag", AMAZON_DE_TAG);
+    } else if (host === "iherb.com") {
+      parsed.searchParams.set("rcode", IHERB_RCODE);
     }
+
     return parsed.toString();
   } catch {
     return url;
