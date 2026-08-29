@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img">
-
-  <rect width="800" height="600" fill="#F7F0E8"/>
-  <path d="M280 240h120v140c0 30-120 30-120 0z" fill="#C45C26"/>
-  <ellipse cx="430" cy="280" rx="30" ry="40" fill="none" stroke="#C45C26" stroke-width="12"/>
-  <path d="M430 250h120v140c0 30-120 30-120 0z" fill="#E8A317"/>
-  <text x="400" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="#C45C26" font-weight="700">DEMO</text>
-
-</svg>

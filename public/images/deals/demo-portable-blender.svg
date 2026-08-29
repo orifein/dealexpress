@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img">
-
-  <rect width="800" height="600" fill="#E9F6F0"/>
-  <rect x="340" y="180" width="120" height="220" rx="20" fill="#1B8A5A"/>
-  <rect x="355" y="200" width="90" height="140" rx="12" fill="#C8F0DD"/>
-  <circle cx="400" cy="430" r="28" fill="#0A1B33"/>
-  <text x="400" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="#1B8A5A" font-weight="700">DEMO</text>
-
-</svg>

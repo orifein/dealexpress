@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img">
-
-  <rect width="800" height="600" fill="#F3EFE6"/>
-  <path d="M300 220h200l20 200H280z" fill="#8B5A2B"/>
-  <rect x="360" y="180" width="80" height="40" rx="10" fill="#5A3A1A"/>
-  <text x="400" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="#8B5A2B" font-weight="700">DEMO</text>
-
-</svg>
