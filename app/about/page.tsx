@@ -13,7 +13,7 @@ export default function AboutPage() {
       <PageHero title={`על ${site.brandEn}`} subtitle={site.taglineHe} />
       <p>{site.descriptionHe}</p>
       <p>
-        כשיש מחיר סופי משוער בשקלים — הוא מוצג ראשון על הכרטיס, עם סימן ~ כי זו
+        כשיש מחיר סופי משוער בשקלים — הוא מוצג ראשון על הכרטיס, עם סימן ≈ כי זו
         הערכה עד הבית.
       </p>
       <p>{site.affiliatePolicyHe}</p>

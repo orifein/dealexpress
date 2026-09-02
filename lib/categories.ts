@@ -14,6 +14,7 @@ export const categoryLabelsHe: Record<string, string> = {
   "ספורט / שעון חכם": "ספורט / שעון חכם",
   "צעצועים": "צעצועים",
   "גיימינג": "גיימינג",
+  "לגו": "לגו",
 };
 
 export const categorySlugs: Record<string, string> = {
@@ -30,6 +31,7 @@ export const categorySlugs: Record<string, string> = {
   "ספורט / שעון חכם": "sport-watch",
   "צעצועים": "toys",
   "גיימינג": "gaming",
+  "לגו": "toys",
 };
 
 export const categoryOrder: DealCategory[] = [

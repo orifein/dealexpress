@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type DealImageProps = {
   src: string;
   alt: string;
@@ -7,13 +9,13 @@ type DealImageProps = {
 
 export function DealImage({ src, alt, className, priority }: DealImageProps) {
   return (
-    // Local merchant photos and demo SVGs.
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
+    <Image
       src={src}
       alt={alt}
+      fill
       className={className}
-      {...(priority ? { fetchPriority: "high" as const } : {})}
+      sizes="(min-width: 1024px) 42vw, (min-width: 640px) 50vw, 100vw"
+      priority={priority}
     />
   );
 }

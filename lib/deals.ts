@@ -17,6 +17,8 @@ type DealFile = Partial<Deal> & {
   affiliateUrl?: string;
   originalPrice?: OriginalPrice;
   badges?: string[];
+  specs?: string[];
+  warnings?: string[];
 };
 
 function inferBrand(title: string): string {
@@ -59,6 +61,8 @@ function normalizeDeal(raw: DealFile): Deal {
     shippingNoteHe: raw.shippingNoteHe,
     summaryHe: raw.summaryHe ?? title,
     highlightsHe: raw.highlightsHe?.length ? raw.highlightsHe : badges,
+    specs: raw.specs,
+    warnings: raw.warnings,
     publishedAt: raw.publishedAt,
     featured: raw.featured,
   };

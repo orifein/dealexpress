@@ -11,7 +11,8 @@ export type DealCategory =
   | "בית / מטבח"
   | "ספורט / שעון חכם"
   | "צעצועים"
-  | "גיימינג";
+  | "גיימינג"
+  | "לגו";
 
 export type OriginalPrice = {
   amount: number;
@@ -47,6 +48,8 @@ export type Deal = {
   shippingNoteHe?: string;
   summaryHe: string;
   highlightsHe: string[];
+  specs?: string[];
+  warnings?: string[];
   publishedAt: string;
   featured?: boolean;
 };

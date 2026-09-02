@@ -16,7 +16,7 @@ export function StoreCta({ deal }: { deal: Deal }) {
     <a
       href={href}
       className="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-dark"
-      rel="noopener noreferrer sponsored"
+      rel="noopener noreferrer nofollow sponsored"
       target="_blank"
     >
       לקנייה ב־{deal.storeName || "החנות"}

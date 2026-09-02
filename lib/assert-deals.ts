@@ -14,6 +14,7 @@ export const requiredRealSlugs = [
   "lego-76451-privet-drive",
   "lego-76325-quinjet",
   "nba-2k27-ps5",
+  "lego-76449-monster-book",
 ] as const;
 
 export function missingRealDeals(): string[] {

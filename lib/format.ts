@@ -1,7 +1,8 @@
 const ilsFormatter = new Intl.NumberFormat("he-IL", {
   style: "currency",
   currency: "ILS",
-  maximumFractionDigits: 0,
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2,
 });
 
 const usdFormatter = new Intl.NumberFormat("en-US", {
@@ -18,7 +19,7 @@ export function formatApproxIls(amount: number): string {
   const n = new Intl.NumberFormat("he-IL", { maximumFractionDigits: 0 }).format(
     amount,
   );
-  return `~₪${n}`;
+  return `≈ ₪${n}`;
 }
 
 export function formatUsd(amount: number): string {
