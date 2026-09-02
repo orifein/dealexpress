@@ -33,6 +33,9 @@ export const metadata: Metadata = {
     title: `${site.brandHe} — כי בארץ זה סתם יקר`,
     description: site.descriptionHe,
   },
+  verification: {
+    google: "a1ECgw5ZDAZxfkQkpfRXPlFwMNgTij0UGZtj3OawNyU",
+  },
   icons: {
     icon: [
       { url: "/favicon-red-v2.ico", type: "image/x-icon", sizes: "16x16 32x32 48x48" },
