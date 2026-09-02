@@ -14,3 +14,6 @@
 - oral-b-io-gentle-cleaning-black-10
 - brita-maxtra-pro-12
 - garmin-vivoactive-6-pebble-grey
+- lego-76451-privet-drive
+- lego-76325-quinjet
+- nba-2k27-ps5

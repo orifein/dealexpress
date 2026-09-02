@@ -9,7 +9,9 @@ export type DealCategory =
   | "sport-watch"
   | "accessories"
   | "בית / מטבח"
-  | "ספורט / שעון חכם";
+  | "ספורט / שעון חכם"
+  | "צעצועים"
+  | "גיימינג";
 
 export type OriginalPrice = {
   amount: number;
