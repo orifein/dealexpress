@@ -18,11 +18,14 @@ export const metadata: Metadata = {
   description: site.descriptionHe,
   icons: {
     icon: [
-      { url: "/icon-e31e24.png", type: "image/png", sizes: "512x512" },
-      { url: "/favicon-e31e24.ico", type: "image/x-icon", sizes: "16x16 32x32 48x48" },
+      { url: "/favicon-red-v2.ico", type: "image/x-icon", sizes: "16x16 32x32 48x48" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon.ico?v=20260902", type: "image/x-icon" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
     ],
+    shortcut: "/favicon-red-v2.ico",
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: "/icon-e31e24.png",
   },
 };
 
