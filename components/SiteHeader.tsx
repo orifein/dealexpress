@@ -21,7 +21,7 @@ export function SiteHeader() {
           </Link>
           <nav aria-label="ראשי" className="flex flex-wrap items-center gap-4 text-sm font-medium">
             {pages.map((page) => (
-              <Link key={page.href} href={page.href} className="hover:text-gold">
+              <Link key={page.href} href={page.href} className="hover:text-brand">
                 {page.label}
               </Link>
             ))}
@@ -33,7 +33,7 @@ export function SiteHeader() {
             <Link
               key={slug}
               href={`/category/${slug}`}
-              className="rounded-full border border-line bg-paper px-3 py-1 text-sm hover:border-gold"
+              className="rounded-full border border-line bg-paper px-3 py-1 text-sm hover:border-brand hover:text-brand"
             >
               {categoryLabel(slug)}
             </Link>

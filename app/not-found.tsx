@@ -5,7 +5,7 @@ export default function NotFound() {
     <div className="space-y-4 py-16 text-center">
       <h1 className="text-3xl font-extrabold text-navy">העמוד לא נמצא</h1>
       <p className="text-muted">יכול להיות שהדיל ירד או שהקישור ישן.</p>
-      <Link href="/" className="inline-block font-semibold text-navy underline decoration-gold">
+      <Link href="/" className="inline-block font-semibold text-brand underline decoration-brand">
         חזרה לדף הבית
       </Link>
     </div>

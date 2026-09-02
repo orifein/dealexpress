@@ -1,20 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #f6f1e8;
-  --ink: #122033;
-  --navy: #0a1b33;
-  --gold: #e8a317;
-  --muted: #5a6570;
+  --paper: #f4f2f0;
+  --ink: #1a1a1a;
+  --navy: #1a1a1a;
+  --brand: #e31e24;
+  --brand-dark: #c4191e;
+  --gold: #e31e24;
+  --muted: #5c5652;
   --card: #ffffff;
-  --line: #e4dccf;
-  --danger: #c43b1e;
+  --line: #e2ddd8;
+  --danger: #c4191e;
 }
 
 @theme inline {
   --color-paper: var(--paper);
   --color-ink: var(--ink);
   --color-navy: var(--navy);
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
   --color-gold: var(--gold);
   --color-muted: var(--muted);
   --color-card: var(--card);
@@ -35,6 +39,6 @@ body {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 3px solid var(--gold);
+  outline: 3px solid var(--brand);
   outline-offset: 3px;
 }

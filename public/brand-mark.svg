@@ -1,4 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#0A1B33"/>
-  <text x="32" y="40" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#E8A317" font-weight="700">DE</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="DEAL EXPRESS">
+  <circle cx="32" cy="32" r="30.5" fill="#ffffff" stroke="#E31E24" stroke-width="2.5"/>
+  <g fill="#E31E24">
+    <rect x="10" y="19" width="11" height="3.4" rx="1.7"/>
+    <rect x="8" y="25.2" width="14" height="3.4" rx="1.7"/>
+    <rect x="10" y="31.4" width="11" height="3.4" rx="1.7"/>
+    <rect x="8" y="37.6" width="14" height="3.4" rx="1.7"/>
+    <path fill-rule="evenodd" d="M24.5 16h8.2c10.6 0 17.8 7.1 17.8 16s-7.2 16-17.8 16h-8.2V16zm8.2 6.2v19.6c6.9 0 11.4-4.3 11.4-9.8s-4.5-9.8-11.4-9.8z"/>
+  </g>
+  <text x="36.2" y="36.8" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="700" fill="#E31E24">₪</text>
 </svg>

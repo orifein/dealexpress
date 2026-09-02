@@ -25,7 +25,7 @@ export function PriceStack({
 
   return (
     <div className="flex flex-col gap-1">
-      <p className="text-xs font-semibold uppercase tracking-wide text-gold">
+      <p className="text-xs font-semibold uppercase tracking-wide text-brand">
         מחיר סופי
       </p>
       <p className={primaryClass} dir="ltr">

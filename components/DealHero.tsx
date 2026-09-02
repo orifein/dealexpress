@@ -24,14 +24,19 @@ export function DealHero({ deal }: { deal: Deal }) {
           {(deal.badges ?? []).map((badge) => (
             <span
               key={badge}
-              className="rounded-full bg-gold px-3 py-1 text-sm font-semibold text-navy"
+              className="rounded-full bg-brand px-3 py-1 text-sm font-semibold text-white"
             >
               {badge}
             </span>
           ))}
-          <span className="rounded-full bg-card px-3 py-1 text-sm">
+          <span className="rounded-full border border-line bg-card px-3 py-1 text-sm">
             {categoryLabel(deal.category)}
           </span>
+          {deal.storeName || deal.store ? (
+            <span className="rounded-full border border-line bg-card px-3 py-1 text-sm">
+              {deal.storeName || deal.store}
+            </span>
+          ) : null}
           <span className="text-sm text-muted">{formatDateHe(deal.publishedAt)}</span>
         </div>
         <p className="text-sm font-semibold uppercase tracking-wide text-muted">

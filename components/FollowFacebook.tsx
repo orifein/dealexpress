@@ -7,8 +7,8 @@ export function FollowFacebook({ variant = "bar" }: { variant?: "bar" | "button"
 
   const className =
     variant === "button"
-      ? "inline-flex items-center justify-center rounded-full bg-[#1877F2] px-4 py-2 text-sm font-semibold text-white"
-      : "inline-flex items-center justify-center rounded-full bg-[#1877F2] px-5 py-2.5 text-sm font-semibold text-white hover:brightness-110";
+      ? "inline-flex items-center justify-center rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-dark"
+      : "inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-dark";
 
   return (
     <a

@@ -6,6 +6,7 @@ import type { Deal } from "@/types/deal";
 
 export function DealCard({ deal }: { deal: Deal }) {
   const href = `/deal/${deal.slug}`;
+  const storeLabel = deal.storeName || deal.store;
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
@@ -19,12 +20,12 @@ export function DealCard({ deal }: { deal: Deal }) {
           {(deal.badges ?? []).map((badge) => (
             <span
               key={badge}
-              className="rounded-full bg-gold px-2.5 py-1 text-xs font-semibold text-navy"
+              className="rounded-full bg-brand px-2.5 py-1 text-xs font-semibold text-white"
             >
               {badge}
             </span>
           ))}
-          <span className="rounded-full bg-card/90 px-2.5 py-1 text-xs font-semibold text-navy">
+          <span className="rounded-full border border-line bg-card/90 px-2.5 py-1 text-xs font-semibold text-navy">
             {categoryLabel(deal.category)}
           </span>
         </div>
@@ -32,10 +33,10 @@ export function DealCard({ deal }: { deal: Deal }) {
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-            {deal.brand}
+            {storeLabel ? `${storeLabel} · ${deal.brand}` : deal.brand}
           </p>
           <h2 className="mt-1 text-lg font-bold leading-snug">
-            <Link href={href} className="hover:text-gold">
+            <Link href={href} className="hover:text-brand">
               {deal.titleHe}
             </Link>
           </h2>
@@ -43,7 +44,7 @@ export function DealCard({ deal }: { deal: Deal }) {
         <PriceStack deal={deal} />
         <Link
           href={href}
-          className="mt-auto text-sm font-semibold text-navy underline decoration-gold"
+          className="mt-auto text-sm font-semibold text-brand underline decoration-brand"
         >
           פרטי הדיל
         </Link>

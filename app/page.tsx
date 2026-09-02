@@ -1,26 +1,32 @@
 import { DealGrid } from "@/components/DealGrid";
 import { FollowFacebook } from "@/components/FollowFacebook";
 import { PageHero } from "@/components/PageHero";
+import { StoreFilters } from "@/components/StoreFilters";
 import { missingRealDeals } from "@/lib/assert-deals";
 import { getRealDeals } from "@/lib/deals";
 import { site } from "@/lib/site";
+import { filterDealsByStore, parseStoreFilter } from "@/lib/stores";
 
-export default function HomePage() {
+export default async function HomePage({ searchParams }: PageProps<"/">) {
   const missing = missingRealDeals();
   if (missing.length > 0) {
     throw new Error(`חסרים דילים אמיתיים: ${missing.join(", ")}`);
   }
 
+  const params = await searchParams;
+  const store = parseStoreFilter(params.store);
+  const deals = filterDealsByStore(getRealDeals(), store);
+
   return (
     <div className="space-y-12">
-      <section className="rounded-3xl bg-navy px-6 py-10 text-paper md:px-10">
-        <p className="mb-3 text-sm font-semibold tracking-[0.18em] text-gold">
+      <section className="rounded-3xl border border-line bg-card px-6 py-10 md:px-10">
+        <p className="mb-3 text-sm font-semibold tracking-[0.18em] text-brand">
           {site.brandEn}
         </p>
-        <h1 className="max-w-2xl text-4xl font-extrabold leading-tight md:text-5xl">
+        <h1 className="max-w-2xl text-4xl font-extrabold leading-tight text-brand md:text-5xl">
           {site.taglineHe}
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-paper/80">{site.descriptionHe}</p>
+        <p className="mt-4 max-w-2xl text-lg text-muted">{site.descriptionHe}</p>
         <div className="mt-6">
           <FollowFacebook />
         </div>
@@ -28,7 +34,8 @@ export default function HomePage() {
 
       <section>
         <PageHero title="הדילים עכשיו" subtitle="המחיר הסופי בשקלים קודם. לוחצים וקונים." />
-        <DealGrid deals={getRealDeals()} empty="עדיין אין דילים אמיתיים." />
+        <StoreFilters active={store} basePath="/" />
+        <DealGrid deals={deals} empty="אין דילים בחנות הזו כרגע." />
       </section>
     </div>
   );

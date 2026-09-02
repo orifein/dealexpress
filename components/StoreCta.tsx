@@ -15,7 +15,7 @@ export function StoreCta({ deal }: { deal: Deal }) {
   return (
     <a
       href={href}
-      className="inline-flex items-center justify-center rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-paper hover:bg-ink"
+      className="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-dark"
       rel="noopener noreferrer sponsored"
       target="_blank"
     >
