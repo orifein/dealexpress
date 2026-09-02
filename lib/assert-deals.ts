@@ -22,6 +22,11 @@ export const requiredRealSlugs = [
   "cmf-buds-pro-2",
   "70mai-m310-plus",
   "70mai-a810s",
+  "doctors-best-mag-240",
+  "cgn-omega-3-100",
+  "now-d3-k2-120",
+  "cgn-d3-5000-90",
+  "cgn-gold-c-1000-60",
 ] as const;
 
 export function missingRealDeals(): string[] {

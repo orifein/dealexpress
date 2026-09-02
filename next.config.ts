@@ -20,6 +20,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.shopify.com",
       },
+      {
+        protocol: "https",
+        hostname: "s3.images-iherb.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cloudinary.images-iherb.com",
+      },
     ],
   },
 };

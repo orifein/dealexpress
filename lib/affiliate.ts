@@ -34,6 +34,8 @@ export function affiliateUrl(url: string): string {
       return parsed.toString();
     }
     if (host === "iherb.com") {
+      parsed.searchParams.delete("IHERB30");
+      parsed.searchParams.delete("iherb30");
       parsed.searchParams.set("rcode", IHERB_RCODE);
       return parsed.toString();
     }

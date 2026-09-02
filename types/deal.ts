@@ -17,7 +17,8 @@ export type DealCategory =
   | "מוזיקה"
   | "אוזניות"
   | "סוללות"
-  | "לרכב";
+  | "לרכב"
+  | "תוספי תזונה";
 
 export type OriginalPrice = {
   amount: number;

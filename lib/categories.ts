@@ -20,6 +20,7 @@ export const categoryLabelsHe: Record<string, string> = {
   "אוזניות": "אוזניות",
   "סוללות": "סוללות",
   "לרכב": "לרכב",
+  "תוספי תזונה": "תוספי תזונה",
 };
 
 export const categorySlugs: Record<string, string> = {
@@ -42,6 +43,7 @@ export const categorySlugs: Record<string, string> = {
   "אוזניות": "headphones",
   "סוללות": "batteries",
   "לרכב": "car",
+  "תוספי תזונה": "supplements",
 };
 
 export const categoryOrder: DealCategory[] = [

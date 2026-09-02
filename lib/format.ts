@@ -16,9 +16,11 @@ export function formatIls(amount: number): string {
 }
 
 export function formatApproxIls(amount: number): string {
-  const n = new Intl.NumberFormat("he-IL", { maximumFractionDigits: 0 }).format(
-    amount,
-  );
+  const fractionDigits = Number.isInteger(amount) ? 0 : 2;
+  const n = new Intl.NumberFormat("he-IL", {
+    maximumFractionDigits: fractionDigits,
+    minimumFractionDigits: fractionDigits,
+  }).format(amount);
   return `≈ ₪${n}`;
 }
 
