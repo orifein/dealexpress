@@ -140,6 +140,41 @@ async function sendDeal(deal) {
   return json.result.message_id;
 }
 
+/**
+ * Round-robins across stores (oldest-first within each store) so a batch
+ * doesn't clump every AliExpress deal together, then every iHerb deal, etc.
+ * Store order itself is shuffled each run for variety.
+ */
+function pickMixedByStore(pendingDeals, max) {
+  const byStore = new Map();
+  for (const deal of pendingDeals) {
+    const key = deal.store || "other";
+    if (!byStore.has(key)) byStore.set(key, []);
+    byStore.get(key).push(deal);
+  }
+  for (const list of byStore.values()) {
+    list.sort((a, b) => new Date(a.publishedAt) - new Date(b.publishedAt));
+  }
+  const storeQueues = Array.from(byStore.values());
+  for (let i = storeQueues.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [storeQueues[i], storeQueues[j]] = [storeQueues[j], storeQueues[i]];
+  }
+
+  const picked = [];
+  let remaining = storeQueues.some((q) => q.length > 0);
+  while (remaining && picked.length < max) {
+    remaining = false;
+    for (const queue of storeQueues) {
+      if (queue.length === 0) continue;
+      picked.push(queue.shift());
+      remaining = remaining || queue.length > 0;
+      if (picked.length >= max) break;
+    }
+  }
+  return picked;
+}
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -155,10 +190,10 @@ async function main() {
   const state = loadState();
   const posted = new Set(state.map((s) => s.slug));
 
-  const pending = deals
-    .filter((d) => !posted.has(d.slug))
-    .sort((a, b) => new Date(a.publishedAt) - new Date(b.publishedAt))
-    .slice(0, max);
+  const pending = pickMixedByStore(
+    deals.filter((d) => !posted.has(d.slug)),
+    max,
+  );
 
   if (pending.length === 0) {
     console.log("No new deals to post.");
