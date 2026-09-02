@@ -23,7 +23,7 @@ export function PriceStack({
       : "text-2xl font-extrabold tracking-tight text-navy";
   const kind = resolvePriceKind(deal);
   const note = kind === "item" ? displayShippingNote(deal) : undefined;
-  const showCompare = kind === "landed" && showsIsraelCompare(deal);
+  const showCompare = showsIsraelCompare(deal);
   const saved = showCompare ? savingsIls(deal) : null;
   const label = primaryPriceLabel(deal);
   const ils = displayIlsAmount(deal);

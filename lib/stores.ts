@@ -53,9 +53,9 @@ export function storeGroup(deal: Deal): StoreGroup {
   return "other";
 }
 
-/** Amazon cards/PDPs show vs-Israel compare. AliExpress and iHerb do not. */
+/** Show vs-Israel compare whenever a real Israel comparison price is set, regardless of store. */
 export function showsIsraelCompare(deal: Deal): boolean {
-  return storeGroup(deal) === "amazon";
+  return typeof deal.compareIls === "number" && deal.compareIls > 0;
 }
 
 export function isIsraelCompareCopy(text: string): boolean {

@@ -61,12 +61,13 @@ export function savingsIls(deal: Deal): number | null {
   if (!showsIsraelCompare(deal)) {
     return null;
   }
+  const amount = displayIlsAmount(deal);
   if (
-    typeof deal.landedIls === "number" &&
+    typeof amount === "number" &&
     typeof deal.compareIls === "number" &&
-    deal.compareIls > deal.landedIls
+    deal.compareIls > amount
   ) {
-    return deal.compareIls - deal.landedIls;
+    return deal.compareIls - amount;
   }
   return null;
 }

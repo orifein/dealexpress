@@ -114,27 +114,56 @@ function caption(deal) {
   return lines.join("\n");
 }
 
+async function downloadImage(url) {
+  const res = await fetch(url, {
+    headers: {
+      "user-agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    },
+  });
+  if (!res.ok) return null;
+  const buffer = Buffer.from(await res.arrayBuffer());
+  return buffer;
+}
+
 async function sendDeal(deal) {
   const photo = imageUrl(deal);
   const dealUrl = `${SITE_BASE_URL}/deal/${deal.slug}`;
-  const body = {
-    chat_id: CHAT_ID,
-    caption: caption(deal),
-    parse_mode: "HTML",
-    reply_markup: {
-      inline_keyboard: [[{ text: "🛒 לרכישה - לחצו כאן", url: dealUrl }]],
-    },
+  const replyMarkup = {
+    inline_keyboard: [[{ text: "🛒 לרכישה - לחצו כאן", url: dealUrl }]],
   };
 
-  const endpoint = photo ? "sendPhoto" : "sendMessage";
-  if (photo) body.photo = photo;
-  else body.text = caption(deal);
+  let res;
+  if (photo) {
+    // Some CDNs (e.g. SHEIN's) block Telegram's own server-side fetch of the
+    // photo url, so download it ourselves and upload the bytes directly.
+    const imageBuffer = await downloadImage(photo);
+    if (!imageBuffer) throw new Error(`Could not download image for ${deal.slug}: ${photo}`);
 
-  const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/${endpoint}`, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(body),
-  });
+    const form = new FormData();
+    form.set("chat_id", CHAT_ID);
+    form.set("caption", caption(deal));
+    form.set("parse_mode", "HTML");
+    form.set("reply_markup", JSON.stringify(replyMarkup));
+    form.set("photo", new Blob([imageBuffer]), "photo.jpg");
+
+    res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+      method: "POST",
+      body: form,
+    });
+  } else {
+    res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: caption(deal),
+        parse_mode: "HTML",
+        reply_markup: replyMarkup,
+      }),
+    });
+  }
+
   const json = await res.json();
   if (!json.ok) throw new Error(`Telegram error for ${deal.slug}: ${JSON.stringify(json)}`);
   return json.result.message_id;
