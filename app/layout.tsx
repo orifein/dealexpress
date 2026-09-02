@@ -16,9 +16,6 @@ export const metadata: Metadata = {
     template: `%s · ${site.brandEn}`,
   },
   description: site.descriptionHe,
-  icons: {
-    icon: "/favicon.svg",
-  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

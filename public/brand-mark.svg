@@ -1,11 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="DEAL EXPRESS">
-  <circle cx="32" cy="32" r="30.5" fill="#ffffff" stroke="#E31E24" stroke-width="2.5"/>
+  <circle cx="32" cy="32" r="30.5" fill="#ffffff" stroke="#E31E24" stroke-width="2.6"/>
   <g fill="#E31E24">
-    <rect x="10" y="19" width="11" height="3.4" rx="1.7"/>
-    <rect x="8" y="25.2" width="14" height="3.4" rx="1.7"/>
-    <rect x="10" y="31.4" width="11" height="3.4" rx="1.7"/>
-    <rect x="8" y="37.6" width="14" height="3.4" rx="1.7"/>
-    <path fill-rule="evenodd" d="M24.5 16h8.2c10.6 0 17.8 7.1 17.8 16s-7.2 16-17.8 16h-8.2V16zm8.2 6.2v19.6c6.9 0 11.4-4.3 11.4-9.8s-4.5-9.8-11.4-9.8z"/>
+    <rect x="11" y="17.2" width="12.5" height="3.15" rx="1.57"/>
+    <rect x="8.2" y="21.6" width="15.6" height="3.15" rx="1.57"/>
+    <rect x="11" y="26" width="12.5" height="3.15" rx="1.57"/>
+    <rect x="7.4" y="30.4" width="16.6" height="3.25" rx="1.62"/>
+    <rect x="11" y="34.8" width="12.5" height="3.15" rx="1.57"/>
+    <rect x="8.2" y="39.2" width="15.6" height="3.15" rx="1.57"/>
+    <rect x="11" y="43.6" width="12.5" height="3.15" rx="1.57"/>
+    <path fill-rule="evenodd" d="M24.5 15.2h8.6c11.2 0 19.5 7.4 19.5 16.8S44.3 48.8 33.1 48.8H24.5V15.2zm8.8 6.4v20.8c7.4 0 12.2-4.5 12.2-10.4S40.7 21.6 33.3 21.6z"/>
+    <rect x="35.2" y="24.8" width="1.95" height="14.4"/>
+    <rect x="39.55" y="24.8" width="1.95" height="14.4"/>
+    <rect x="33.7" y="28.3" width="9.3" height="2.2"/>
+    <rect x="33.7" y="33.5" width="9.3" height="2.2"/>
   </g>
-  <text x="36.2" y="36.8" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="700" fill="#E31E24">₪</text>
 </svg>
