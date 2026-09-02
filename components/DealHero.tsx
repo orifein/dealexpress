@@ -3,6 +3,7 @@ import { PriceStack } from "@/components/PriceStack";
 import { StoreCta } from "@/components/StoreCta";
 import { categoryLabel } from "@/lib/categories";
 import { formatDateHe } from "@/lib/format";
+import { resolvePriceKind } from "@/lib/pricing";
 import type { Deal } from "@/types/deal";
 
 export function DealHero({ deal }: { deal: Deal }) {
@@ -46,7 +47,7 @@ export function DealHero({ deal }: { deal: Deal }) {
         <h1 className="text-3xl font-extrabold text-navy md:text-4xl">{deal.titleHe}</h1>
         {summary ? <p className="text-lg text-muted">{summary}</p> : null}
         <PriceStack deal={deal} size="detail" />
-        {deal.shippingNoteHe ? (
+        {resolvePriceKind(deal) === "landed" && deal.shippingNoteHe ? (
           <p className="rounded-xl bg-card px-4 py-3 text-sm text-muted">
             {deal.shippingNoteHe}
           </p>

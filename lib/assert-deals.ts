@@ -17,6 +17,11 @@ export const requiredRealSlugs = [
   "lego-76449-monster-book",
   "yamaha-pss-f30-black",
   "lego-10311-orchid",
+  "lenovo-gm2-pro",
+  "baseus-22-5w-20000",
+  "cmf-buds-pro-2",
+  "70mai-m310-plus",
+  "70mai-a810s",
 ] as const;
 
 export function missingRealDeals(): string[] {

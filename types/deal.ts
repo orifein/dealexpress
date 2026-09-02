@@ -14,7 +14,10 @@ export type DealCategory =
   | "גיימינג"
   | "לגו"
   | "music"
-  | "מוזיקה";
+  | "מוזיקה"
+  | "אוזניות"
+  | "סוללות"
+  | "לרכב";
 
 export type OriginalPrice = {
   amount: number;
@@ -42,12 +45,17 @@ export type Deal = {
   priceUsd?: number;
   listPriceUsd?: number;
   landedIls?: number;
+  itemIls?: number;
+  itemOnly?: boolean;
+  itemId?: string;
   landedIlsEstimated?: boolean;
   couponCode?: string | null;
   badges?: string[];
   expiresAt?: string | null;
   compareIls?: number;
   shippingNoteHe?: string;
+  shippingNote?: string;
+  priceKind?: "item" | "landed";
   summaryHe: string;
   highlightsHe: string[];
   specs?: string[];

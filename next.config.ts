@@ -8,6 +8,18 @@ const nextConfig: NextConfig = {
         hostname: "m.media-amazon.com",
         pathname: "/images/**",
       },
+      {
+        protocol: "https",
+        hostname: "ae-pic-a1.aliexpress-media.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.alicdn.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.shopify.com",
+      },
     ],
   },
 };

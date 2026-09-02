@@ -1,6 +1,8 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { categoriesMatch } from "@/lib/categories";
+import { DEFAULT_ITEM_SHIPPING_NOTE } from "@/lib/pricing";
+import { storeGroup } from "@/lib/stores";
 import type { Deal, DealCategory, OriginalPrice } from "@/types/deal";
 
 const dealsDir = join(process.cwd(), "content/deals");
@@ -10,7 +12,6 @@ export const HIDE_DEMO_DEALS = true;
 
 type DealFile = Partial<Deal> & {
   slug: string;
-  image: string;
   publishedAt: string;
   title?: string;
   store?: string;
@@ -19,6 +20,11 @@ type DealFile = Partial<Deal> & {
   badges?: string[];
   specs?: string[];
   warnings?: string[];
+  itemOnly?: boolean;
+  itemIls?: number;
+  itemId?: string;
+  priceKind?: "item" | "landed";
+  shippingNote?: string;
 };
 
 function inferBrand(title: string): string {
@@ -31,6 +37,24 @@ function normalizeDeal(raw: DealFile): Deal {
   const storeUrl = raw.storeUrl ?? raw.affiliateUrl ?? "";
   const storeName = raw.storeName ?? raw.store ?? "";
   const badges = raw.badges ?? [];
+  const group = storeGroup({
+    store: raw.store ?? storeName,
+    storeName,
+    storeUrl,
+    affiliateUrl: raw.affiliateUrl ?? storeUrl,
+  } as Deal);
+  const priceKind: "item" | "landed" =
+    raw.priceKind === "item" || raw.itemOnly === true
+      ? "item"
+      : raw.priceKind === "landed"
+        ? "landed"
+        : group === "aliexpress" || group === "iherb"
+          ? "item"
+          : "landed";
+  const shippingNote =
+    raw.shippingNote ??
+    raw.shippingNoteHe ??
+    (priceKind === "item" ? DEFAULT_ITEM_SHIPPING_NOTE : undefined);
 
   return {
     slug: raw.slug,
@@ -43,7 +67,7 @@ function normalizeDeal(raw: DealFile): Deal {
     color: raw.color,
     size: raw.size,
     model: raw.model,
-    image: raw.image,
+    image: raw.image ?? "",
     imageAltHe: raw.imageAltHe ?? title,
     store: raw.store ?? storeName,
     storeUrl,
@@ -53,12 +77,17 @@ function normalizeDeal(raw: DealFile): Deal {
     priceUsd: raw.priceUsd ?? raw.originalPrice?.amount,
     listPriceUsd: raw.listPriceUsd,
     landedIls: raw.landedIls,
+    itemIls: raw.itemIls,
+    itemOnly: raw.itemOnly === true ? true : undefined,
+    itemId: raw.itemId,
     landedIlsEstimated: raw.landedIlsEstimated,
     couponCode: raw.couponCode ?? null,
     badges,
     expiresAt: raw.expiresAt ?? null,
     compareIls: raw.compareIls,
-    shippingNoteHe: raw.shippingNoteHe,
+    shippingNoteHe: shippingNote,
+    shippingNote,
+    priceKind,
     summaryHe: raw.summaryHe ?? title,
     highlightsHe: raw.highlightsHe?.length ? raw.highlightsHe : badges,
     specs: raw.specs,

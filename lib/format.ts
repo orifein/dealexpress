@@ -26,6 +26,18 @@ export function formatUsd(amount: number): string {
   return usdFormatter.format(amount);
 }
 
+export function formatOriginalPrice(amount: number, currency: string): string {
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency,
+      maximumFractionDigits: 2,
+    }).format(amount);
+  } catch {
+    return `${amount} ${currency}`;
+  }
+}
+
 export function formatDateHe(iso: string): string {
   return new Intl.DateTimeFormat("he-IL", {
     day: "numeric",

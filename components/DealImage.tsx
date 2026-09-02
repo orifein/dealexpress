@@ -8,6 +8,12 @@ type DealImageProps = {
 };
 
 export function DealImage({ src, alt, className, priority }: DealImageProps) {
+  if (!src?.trim()) {
+    return (
+      <div className={className} role="img" aria-label={alt || "אין תמונת מוצר"} />
+    );
+  }
+
   return (
     <Image
       src={src}

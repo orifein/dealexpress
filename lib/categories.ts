@@ -17,6 +17,9 @@ export const categoryLabelsHe: Record<string, string> = {
   "לגו": "לגו",
   music: "מוזיקה",
   "מוזיקה": "מוזיקה",
+  "אוזניות": "אוזניות",
+  "סוללות": "סוללות",
+  "לרכב": "לרכב",
 };
 
 export const categorySlugs: Record<string, string> = {
@@ -36,6 +39,9 @@ export const categorySlugs: Record<string, string> = {
   "לגו": "toys",
   music: "music",
   "מוזיקה": "music",
+  "אוזניות": "headphones",
+  "סוללות": "batteries",
+  "לרכב": "car",
 };
 
 export const categoryOrder: DealCategory[] = [
