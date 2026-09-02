@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FollowFacebook } from "@/components/FollowFacebook";
+import { FollowSocials } from "@/components/FollowSocials";
 import { SocialLinks } from "@/components/SocialLinks";
 import { site } from "@/lib/site";
 
@@ -13,7 +13,7 @@ export function SiteFooter() {
           <p className="text-sm text-white/80">{site.affiliatePolicyHe}</p>
         </div>
         <div className="space-y-3 text-sm">
-          <FollowFacebook />
+          <FollowSocials />
           <SocialLinks />
           <div className="flex flex-col gap-2">
             <Link href="/privacy" className="underline decoration-brand/50">

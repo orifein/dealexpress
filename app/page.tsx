@@ -1,5 +1,5 @@
 import { DealGrid } from "@/components/DealGrid";
-import { FollowFacebook } from "@/components/FollowFacebook";
+import { FollowSocials } from "@/components/FollowSocials";
 import { PageHero } from "@/components/PageHero";
 import { StoreFilters } from "@/components/StoreFilters";
 import { missingRealDeals } from "@/lib/assert-deals";
@@ -28,7 +28,7 @@ export default async function HomePage({ searchParams }: PageProps<"/">) {
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-muted">{site.descriptionHe}</p>
         <div className="mt-6">
-          <FollowFacebook />
+          <FollowSocials />
         </div>
       </section>
 

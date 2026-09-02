@@ -1,25 +1,16 @@
-import { hasTelegram, hasWhatsApp, site } from "@/lib/site";
+import { hasWhatsApp, site } from "@/lib/site";
 
+/** WhatsApp only. Telegram is the FollowTelegram pill next to Facebook. */
 export function SocialLinks() {
-  const telegram = hasTelegram();
-  const whatsapp = hasWhatsApp();
-
-  if (!telegram && !whatsapp) {
+  if (!hasWhatsApp()) {
     return null;
   }
 
   return (
     <div className="flex flex-wrap gap-3">
-      {telegram ? (
-        <a href={site.telegramUrl} className="underline" rel="noopener noreferrer" target="_blank">
-          טלגרם
-        </a>
-      ) : null}
-      {whatsapp ? (
-        <a href={site.whatsappUrl} className="underline" rel="noopener noreferrer" target="_blank">
-          וואטסאפ
-        </a>
-      ) : null}
+      <a href={site.whatsappUrl} className="underline" rel="noopener noreferrer" target="_blank">
+        וואטסאפ
+      </a>
     </div>
   );
 }

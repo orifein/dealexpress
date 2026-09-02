@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/BrandMark";
-import { FollowFacebook } from "@/components/FollowFacebook";
+import { FollowSocials } from "@/components/FollowSocials";
 import { SkipLink } from "@/components/SkipLink";
 import { categoryLabel, categoryOrder } from "@/lib/categories";
 
@@ -25,7 +25,7 @@ export function SiteHeader() {
                 {page.label}
               </Link>
             ))}
-            <FollowFacebook variant="button" />
+            <FollowSocials variant="button" />
           </nav>
         </div>
         <nav aria-label="קטגוריות" className="flex flex-wrap gap-2">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { FollowFacebook } from "@/components/FollowFacebook";
+import { FollowSocials } from "@/components/FollowSocials";
 import { PageHero } from "@/components/PageHero";
 import { site } from "@/lib/site";
 
@@ -17,7 +17,7 @@ export default function AboutPage() {
         הערכה עד הבית.
       </p>
       <p>{site.affiliatePolicyHe}</p>
-      <FollowFacebook />
+      <FollowSocials />
     </div>
   );
 }
