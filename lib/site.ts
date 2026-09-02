@@ -1,7 +1,15 @@
 import siteJson from "@/content/site.json";
 import type { SiteConfig } from "@/types/site";
 
-export const site: SiteConfig = siteJson;
+const FACEBOOK_GROUP_URL = "https://www.facebook.com/groups/dealexpress/";
+
+export const site: SiteConfig = {
+  ...siteJson,
+  facebookFollowUrl:
+    process.env.NEXT_PUBLIC_FACEBOOK_URL?.trim() ||
+    siteJson.facebookFollowUrl ||
+    FACEBOOK_GROUP_URL,
+};
 
 export function hasFacebookFollow(): boolean {
   return Boolean(site.facebookFollowUrl);

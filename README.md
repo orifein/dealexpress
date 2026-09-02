@@ -18,4 +18,7 @@ npm run dev
 npm run build
 ```
 
+קישור קבוצת הפייסבוק: `https://www.facebook.com/groups/dealexpress/`
+(משתנה `NEXT_PUBLIC_FACEBOOK_URL`, ראו `.env.example`)
+
 דילים אמיתיים ודוגמאות יושבים ב־`content/deals/`.
