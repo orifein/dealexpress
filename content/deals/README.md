@@ -24,3 +24,6 @@
 - abca-mini-coffee-scale
 - miyoo-mini-plus-retro-console
 - beauty-of-joseon-ginseng-essence-water
+- shein-gloweve-knit-top
+- shein-petite-linen-dress
+- shein-denim-vintage-tote-bag

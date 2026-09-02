@@ -5,6 +5,7 @@ const AMAZON_DE_TAG = "dealexpress21-21";
 const IHERB_RCODE = "DBO0874";
 const AE_TRACKING_ID = "deal_express";
 const AE_GATEWAY = "glo2isr";
+const SHEIN_URL_FROM = "GM71036732507";
 
 function hostOf(hostname: string): string {
   return hostname.toLowerCase().replace(/^www\./, "");
@@ -49,6 +50,11 @@ export function affiliateUrl(url: string): string {
 
     if (host === "aliexpress.com" || host.endsWith(".aliexpress.com")) {
       return withAliExpressParams(parsed);
+    }
+
+    if (host === "shein.com" || host.endsWith(".shein.com")) {
+      parsed.searchParams.set("url_from", SHEIN_URL_FROM);
+      return parsed.toString();
     }
 
     return parsed.toString();
