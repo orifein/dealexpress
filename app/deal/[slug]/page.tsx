@@ -15,9 +15,24 @@ export async function generateMetadata({
   if (!deal) {
     return { title: "דיל לא נמצא" };
   }
+  const image = deal.image || undefined;
   return {
     title: deal.titleHe,
     description: deal.summaryHe,
+    alternates: { canonical: `/deal/${deal.slug}` },
+    openGraph: {
+      type: "website",
+      title: deal.titleHe,
+      description: deal.summaryHe,
+      url: `/deal/${deal.slug}`,
+      images: image ? [{ url: image, alt: deal.imageAltHe }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: deal.titleHe,
+      description: deal.summaryHe,
+      images: image ? [image] : undefined,
+    },
   };
 }
 

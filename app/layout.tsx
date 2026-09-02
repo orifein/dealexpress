@@ -11,12 +11,28 @@ const heebo = Heebo({
   subsets: ["hebrew", "latin"],
 });
 
+const SITE_URL = "https://dealexpress-live.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `${site.brandHe} — כי בארץ זה סתם יקר`,
     template: `%s · ${site.brandEn}`,
   },
   description: site.descriptionHe,
+  openGraph: {
+    type: "website",
+    locale: "he_IL",
+    siteName: site.brandHe,
+    title: `${site.brandHe} — כי בארץ זה סתם יקר`,
+    description: site.descriptionHe,
+    url: SITE_URL,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.brandHe} — כי בארץ זה סתם יקר`,
+    description: site.descriptionHe,
+  },
   icons: {
     icon: [
       { url: "/favicon-red-v2.ico", type: "image/x-icon", sizes: "16x16 32x32 48x48" },
