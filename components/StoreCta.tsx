@@ -2,7 +2,7 @@ import { affiliateUrl } from "@/lib/affiliate";
 import type { Deal } from "@/types/deal";
 
 export function StoreCta({ deal }: { deal: Deal }) {
-  const href = affiliateUrl(deal.storeUrl);
+  const href = affiliateUrl(deal.affiliateUrl || deal.storeUrl);
 
   if (deal.demo || !href) {
     return (

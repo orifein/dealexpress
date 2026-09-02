@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DealGrid } from "@/components/DealGrid";
 import { PageHero } from "@/components/PageHero";
-import { categoryLabelsHe, categoryOrder } from "@/lib/categories";
+import { categoryLabel, categoryOrder } from "@/lib/categories";
 import { getDealsByCategory } from "@/lib/deals";
 import type { DealCategory } from "@/types/deal";
 
@@ -21,7 +21,7 @@ export async function generateMetadata({
   if (!isCategory(slug)) {
     return { title: "קטגוריה" };
   }
-  return { title: categoryLabelsHe[slug] };
+  return { title: categoryLabel(slug) };
 }
 
 export default async function CategoryPage({
@@ -34,7 +34,7 @@ export default async function CategoryPage({
 
   return (
     <>
-      <PageHero title={categoryLabelsHe[slug]} />
+      <PageHero title={categoryLabel(slug)} />
       <DealGrid deals={getDealsByCategory(slug)} />
     </>
   );

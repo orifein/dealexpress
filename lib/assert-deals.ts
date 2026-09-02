@@ -9,6 +9,8 @@ export const requiredRealSlugs = [
   "razer-basilisk-v3-pro-black",
   "oral-b-io-gentle-cleaning-white-10",
   "oral-b-io-gentle-cleaning-black-10",
+  "brita-maxtra-pro-12",
+  "garmin-vivoactive-6-pebble-grey",
 ] as const;
 
 export function missingRealDeals(): string[] {

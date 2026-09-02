@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { DealImage } from "@/components/DealImage";
-import { DemoBadge } from "@/components/DemoBadge";
 import { PriceStack } from "@/components/PriceStack";
-import { categoryLabelsHe } from "@/lib/categories";
+import { categoryLabel } from "@/lib/categories";
 import type { Deal } from "@/types/deal";
 
 export function DealCard({ deal }: { deal: Deal }) {
@@ -16,10 +15,17 @@ export function DealCard({ deal }: { deal: Deal }) {
           alt={deal.imageAltHe}
           className="h-full w-full object-contain p-3"
         />
-        <div className="absolute start-3 top-3 flex gap-2">
-          {deal.demo ? <DemoBadge /> : null}
+        <div className="absolute start-3 top-3 flex flex-wrap gap-2">
+          {(deal.badges ?? []).map((badge) => (
+            <span
+              key={badge}
+              className="rounded-full bg-gold px-2.5 py-1 text-xs font-semibold text-navy"
+            >
+              {badge}
+            </span>
+          ))}
           <span className="rounded-full bg-card/90 px-2.5 py-1 text-xs font-semibold text-navy">
-            {categoryLabelsHe[deal.category]}
+            {categoryLabel(deal.category)}
           </span>
         </div>
       </Link>

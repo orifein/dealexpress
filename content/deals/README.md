@@ -2,7 +2,7 @@
 
 כל קובץ JSON הוא דיל אחד. `demo: false` = דיל אמיתי.
 
-שמונת הדילים האמיתיים:
+דילים אמיתיים (`demo: false`):
 
 - reebok-shadoray-black-white-us9
 - reebok-shadoray-white-green-us9
@@ -12,3 +12,5 @@
 - razer-basilisk-v3-pro-black
 - oral-b-io-gentle-cleaning-white-10
 - oral-b-io-gentle-cleaning-black-10
+- brita-maxtra-pro-12
+- garmin-vivoactive-6-pebble-grey

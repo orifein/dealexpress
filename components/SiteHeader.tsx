@@ -2,7 +2,7 @@ import Link from "next/link";
 import { BrandMark } from "@/components/BrandMark";
 import { FollowFacebook } from "@/components/FollowFacebook";
 import { SkipLink } from "@/components/SkipLink";
-import { categoryLabelsHe, categoryOrder } from "@/lib/categories";
+import { categoryLabel, categoryOrder } from "@/lib/categories";
 
 const pages = [
   { href: "/deals", label: "כל הדילים" },
@@ -35,7 +35,7 @@ export function SiteHeader() {
               href={`/category/${slug}`}
               className="rounded-full border border-line bg-paper px-3 py-1 text-sm hover:border-gold"
             >
-              {categoryLabelsHe[slug]}
+              {categoryLabel(slug)}
             </Link>
           ))}
         </nav>

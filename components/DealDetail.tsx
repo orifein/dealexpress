@@ -10,6 +10,7 @@ export function DealDetail({ deal }: { deal: Deal }) {
   return (
     <article className="space-y-12">
       <DealHero deal={deal} />
+      {deal.highlightsHe.length > 0 ? (
       <section>
         <h2 className="mb-4 text-2xl font-bold text-navy">למה זה דיל</h2>
         <ul className="list-disc space-y-2 pe-5 text-lg">
@@ -18,6 +19,7 @@ export function DealDetail({ deal }: { deal: Deal }) {
           ))}
         </ul>
       </section>
+      ) : null}
       <p className="text-sm text-muted">{site.usdIlsNoteHe}</p>
       {related.length > 0 ? (
         <section>
