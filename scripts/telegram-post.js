@@ -93,7 +93,13 @@ function saveState(state) {
 
 function imageUrl(deal) {
   if (!deal.image) return null;
-  return deal.image.startsWith("http") ? deal.image : `${SITE_BASE_URL}${deal.image}`;
+  const url = deal.image.startsWith("http") ? deal.image : `${SITE_BASE_URL}${deal.image}`;
+  // Telegram can't process AVIF; SHEIN's CDN (img.ltwebstatic.com) serves the
+  // same image as a real .jpg if you strip any "_..." transform suffix.
+  if (url.endsWith(".avif") && url.includes("ltwebstatic.com")) {
+    return url.replace(/_[^/]*\.avif$/, ".jpg").replace(/\.avif$/, ".jpg");
+  }
+  return url;
 }
 
 function escapeHtml(str) {
