@@ -20,3 +20,5 @@
 - lego-76449-monster-book
 - yamaha-pss-f30-black
 - lego-10311-orchid
+- navir-stellarscope-toy-telescope
+- abca-mini-coffee-scale
