@@ -22,3 +22,5 @@
 - lego-10311-orchid
 - navir-stellarscope-toy-telescope
 - abca-mini-coffee-scale
+- miyoo-mini-plus-retro-console
+- beauty-of-joseon-ginseng-essence-water
