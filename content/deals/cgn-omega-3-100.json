@@ -1,8 +1,12 @@
 {
   "slug": "cgn-omega-3-100",
   "title": "CGN Omega-3 Premium 100 כמוסות",
+  "image": "/images/deals/cgn-omega-3-100.jpg",
   "store": "iHerb",
-  "originalPrice": { "amount": 36.96, "currency": "ILS" },
+  "originalPrice": {
+    "amount": 36.96,
+    "currency": "ILS"
+  },
   "affiliateUrl": "https://www.iherb.com/pr/california-gold-nutrition-omega-3-premium-fish-oil-100-fish-gelatin-softgels-1-100-mg-per-softgel/62118?rcode=DBO0874",
   "publishedAt": "2026-09-02T15:26:00+03:00",
   "itemIls": 36.96,

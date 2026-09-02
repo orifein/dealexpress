@@ -1,8 +1,12 @@
 {
   "slug": "now-d3-k2-120",
   "title": "NOW Foods ויטמין D3 ו-K2, 120 כמוסות",
+  "image": "/images/deals/now-d3-k2-120.jpg",
   "store": "iHerb",
-  "originalPrice": { "amount": 33.11, "currency": "ILS" },
+  "originalPrice": {
+    "amount": 33.11,
+    "currency": "ILS"
+  },
   "affiliateUrl": "https://www.iherb.com/pr/now-foods-vitamin-d3-k2-120-capsules/10056?rcode=DBO0874",
   "publishedAt": "2026-09-02T15:26:00+03:00",
   "itemIls": 33.11,

@@ -1,8 +1,12 @@
 {
   "slug": "doctors-best-mag-240",
   "title": "Doctor's Best מגנזיום 240 טבליות (100 מ״ג)",
+  "image": "/images/deals/doctors-best-mag-240.jpg",
   "store": "iHerb",
-  "originalPrice": { "amount": 82.9, "currency": "ILS" },
+  "originalPrice": {
+    "amount": 82.9,
+    "currency": "ILS"
+  },
   "affiliateUrl": "https://www.iherb.com/pr/doctor-s-best-high-absorption-magnesium-lysinate-glycinate-chelated-albion-traacs-240-tablets-100-mg-per-tablet/16567?rcode=DBO0874",
   "publishedAt": "2026-09-02T15:26:00+03:00",
   "itemIls": 82.9,

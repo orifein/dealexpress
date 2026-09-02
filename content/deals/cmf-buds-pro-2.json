@@ -1,9 +1,12 @@
 {
   "slug": "cmf-buds-pro-2",
   "title": "CMF by Nothing Buds Pro 2",
-  "image": "https://cdn.shopify.com/s/files/1/0376/5420/0459/files/0000s_0070_CMF-Buds-Pro-2-case-lightgrey.png",
+  "image": "/images/deals/cmf-buds-pro-2.png",
   "store": "AliExpress",
-  "originalPrice": { "amount": 39.2, "currency": "USD" },
+  "originalPrice": {
+    "amount": 39.2,
+    "currency": "USD"
+  },
   "affiliateUrl": "https://www.aliexpress.com/item/1005009808819864.html?gatewayAdapt=glo2isr&tracking_id=deal_express",
   "publishedAt": "2026-09-02T15:09:00+03:00",
   "itemIls": 119,

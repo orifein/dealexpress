@@ -1,8 +1,12 @@
 {
   "slug": "cgn-d3-5000-90",
   "title": "CGN ויטמין D3 5000 IU, 90 כמוסות",
+  "image": "/images/deals/cgn-d3-5000-90.jpg",
   "store": "iHerb",
-  "originalPrice": { "amount": 17.44, "currency": "ILS" },
+  "originalPrice": {
+    "amount": 17.44,
+    "currency": "ILS"
+  },
   "affiliateUrl": "https://www.iherb.com/pr/california-gold-nutrition-vitamin-d3-125-mcg-5-000-iu-90-fish-gelatin-softgels/70316?rcode=DBO0874",
   "publishedAt": "2026-09-02T15:26:00+03:00",
   "itemIls": 17.44,

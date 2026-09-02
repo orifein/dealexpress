@@ -1,8 +1,12 @@
 {
   "slug": "70mai-m310-plus",
   "title": "70mai M310 Plus מצלמת רכב 2K",
+  "image": "/images/deals/70mai-m310-plus.png",
   "store": "AliExpress",
-  "originalPrice": { "amount": 34.49, "currency": "USD" },
+  "originalPrice": {
+    "amount": 34.49,
+    "currency": "USD"
+  },
   "affiliateUrl": "https://www.aliexpress.com/item/1005006212818160.html?gatewayAdapt=glo2isr&tracking_id=deal_express",
   "publishedAt": "2026-09-02T15:09:00+03:00",
   "itemIls": 105,

@@ -1,8 +1,12 @@
 {
   "slug": "cgn-gold-c-1000-60",
   "title": "CGN Gold C ויטמין C 1000 מ״ג, 60 כמוסות",
+  "image": "/images/deals/cgn-gold-c-1000-60.jpg",
   "store": "iHerb",
-  "originalPrice": { "amount": 17.69, "currency": "ILS" },
+  "originalPrice": {
+    "amount": 17.69,
+    "currency": "ILS"
+  },
   "affiliateUrl": "https://www.iherb.com/pr/california-gold-nutrition-gold-c-usp-grade-vitamin-c-1-000-mg-60-veggie-capsules/61864?rcode=DBO0874",
   "publishedAt": "2026-09-02T15:26:00+03:00",
   "itemIls": 17.69,
