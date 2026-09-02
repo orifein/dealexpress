@@ -4,6 +4,12 @@
  * channel, tracking what's already been sent in content/telegram/posted.json
  * so runs never duplicate a post.
  *
+ * Deal JSON files use two field naming schemes (title/store/itemIls for
+ * AliExpress+iHerb "item-only" deals, titleHe/storeName/landedIls for Amazon
+ * "landed price" deals, sometimes mixed) — normalizeDeal() below mirrors the
+ * fallback chain in lib/deals.ts so every deal renders correctly regardless
+ * of which fields the file actually has.
+ *
  * Usage: TELEGRAM_BOT_TOKEN=xxx node scripts/telegram-post.js [--max 5] [--gap-seconds 120]
  */
 
@@ -27,11 +33,52 @@ function parseArgs(argv) {
   return args;
 }
 
-function loadDeals() {
+function loadRawDeals() {
   const files = fs.readdirSync(DEALS_DIR).filter((f) => f.endsWith(".json"));
-  return files
-    .map((f) => JSON.parse(fs.readFileSync(path.join(DEALS_DIR, f), "utf8")))
-    .filter((d) => d.demo !== true);
+  return files.map((f) => JSON.parse(fs.readFileSync(path.join(DEALS_DIR, f), "utf8")));
+}
+
+function normalizeDeal(raw) {
+  const title = raw.titleHe ?? raw.title ?? raw.slug;
+  const store = raw.storeName ?? raw.store ?? "";
+  const summary =
+    raw.summaryHe ??
+    (Array.isArray(raw.highlightsHe) && raw.highlightsHe.length
+      ? raw.highlightsHe.slice(0, 2).join(" · ")
+      : Array.isArray(raw.specs) && raw.specs.length
+        ? raw.specs.slice(0, 2).join(" · ")
+        : null);
+  const shippingNote = raw.shippingNoteHe ?? raw.shippingNote ?? null;
+
+  let priceLine = null;
+  if (typeof raw.itemIls === "number") {
+    priceLine = `מחיר פריט ≈ ₪${raw.itemIls}`;
+  } else if (typeof raw.landedIls === "number") {
+    priceLine =
+      typeof raw.compareIls === "number"
+        ? `מחיר סופי משוער ≈ ₪${raw.landedIls} (מול ≈ ₪${raw.compareIls} בארץ)`
+        : `מחיר סופי משוער ≈ ₪${raw.landedIls}`;
+  } else if (raw.originalPrice) {
+    priceLine = `מחיר ${raw.originalPrice.amount} ${raw.originalPrice.currency}`;
+  }
+
+  return {
+    slug: raw.slug,
+    demo: Boolean(raw.demo),
+    title,
+    store,
+    summary,
+    priceLine,
+    shippingNote,
+    image: raw.image ?? "",
+    publishedAt: raw.publishedAt,
+  };
+}
+
+function loadDeals() {
+  return loadRawDeals()
+    .map(normalizeDeal)
+    .filter((d) => !d.demo);
 }
 
 function loadState() {
@@ -49,25 +96,27 @@ function imageUrl(deal) {
   return deal.image.startsWith("http") ? deal.image : `${SITE_BASE_URL}${deal.image}`;
 }
 
-function priceLine(deal) {
-  if (deal.itemIls) return `מחיר פריט ≈ ₪${deal.itemIls}`;
-  if (deal.originalPrice) return `מחיר ${deal.originalPrice.amount} ${deal.originalPrice.currency}`;
-  return "";
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 function caption(deal) {
   const lines = [
-    `<b>${deal.title}</b>`,
-    deal.store ? `🛒 ${deal.store}` : null,
-    priceLine(deal) ? `💰 ${priceLine(deal)}` : null,
-    deal.shippingNote ? `🚚 ${deal.shippingNote}` : null,
+    `<b>${escapeHtml(deal.title)}</b>`,
+    deal.summary ? escapeHtml(deal.summary) : null,
+    deal.store ? `🛒 ${escapeHtml(deal.store)}` : null,
+    deal.priceLine ? `💰 ${escapeHtml(deal.priceLine)}` : null,
+    deal.shippingNote ? `🚚 ${escapeHtml(deal.shippingNote)}` : null,
   ].filter(Boolean);
   return lines.join("\n");
 }
 
 async function sendDeal(deal) {
   const photo = imageUrl(deal);
-  const dealUrl = `${SITE_BASE_URL}/deals/${deal.slug}`;
+  const dealUrl = `${SITE_BASE_URL}/deal/${deal.slug}`;
   const body = {
     chat_id: CHAT_ID,
     caption: caption(deal),
@@ -126,7 +175,11 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
+
+module.exports = { loadDeals, caption, BOT_TOKEN, CHAT_ID, SITE_BASE_URL };
