@@ -1,22 +1,27 @@
 import { DealGrid } from "@/components/DealGrid";
 import { DealHero } from "@/components/DealHero";
 import { getRelatedDeals } from "@/lib/deals";
+import { isIsraelCompareCopy, showsIsraelCompare } from "@/lib/stores";
 import { site } from "@/lib/site";
 import type { Deal } from "@/types/deal";
 
 export function DealDetail({ deal }: { deal: Deal }) {
   const related = getRelatedDeals(deal);
-  const specs = deal.specs ?? [];
+  const allowIsrael = showsIsraelCompare(deal);
+  const specs = (deal.specs ?? []).filter((item) => allowIsrael || !isIsraelCompareCopy(item));
   const warnings = deal.warnings ?? [];
+  const highlights = deal.highlightsHe.filter(
+    (item) => allowIsrael || !isIsraelCompareCopy(item),
+  );
 
   return (
     <article className="space-y-12">
       <DealHero deal={deal} />
-      {deal.highlightsHe.length > 0 ? (
+      {highlights.length > 0 ? (
         <section>
           <h2 className="mb-4 text-2xl font-bold text-navy">למה זה דיל</h2>
           <ul className="list-disc space-y-2 pe-5 text-lg">
-            {deal.highlightsHe.map((item) => (
+            {highlights.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>

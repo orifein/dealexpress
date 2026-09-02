@@ -1,5 +1,6 @@
 import { formatApproxIls, formatIls } from "@/lib/format";
 import { hasLandedPrice, savingsIls } from "@/lib/pricing";
+import { showsIsraelCompare } from "@/lib/stores";
 import type { Deal } from "@/types/deal";
 
 export function PriceStack({
@@ -13,7 +14,8 @@ export function PriceStack({
     size === "detail"
       ? "text-4xl font-extrabold tracking-tight text-navy"
       : "text-2xl font-extrabold tracking-tight text-navy";
-  const saved = savingsIls(deal);
+  const showCompare = showsIsraelCompare(deal);
+  const saved = showCompare ? savingsIls(deal) : null;
 
   if (!hasLandedPrice(deal) || deal.landedIls == null) {
     return (
@@ -31,7 +33,7 @@ export function PriceStack({
       <p className={primaryClass} dir="ltr">
         {formatApproxIls(deal.landedIls)}
       </p>
-      {deal.compareIls ? (
+      {showCompare && deal.compareIls ? (
         <p className="text-sm text-muted line-through">
           {formatIls(deal.compareIls)} בארץ
         </p>
