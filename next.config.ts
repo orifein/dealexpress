@@ -28,6 +28,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cloudinary.images-iherb.com",
       },
+      {
+        protocol: "https",
+        hostname: "img.ltwebstatic.com",
+      },
     ],
   },
 };

@@ -8,6 +8,7 @@ export type DealCategory =
   | "home-kitchen"
   | "sport-watch"
   | "accessories"
+  | "fashion"
   | "בית / מטבח"
   | "ספורט / שעון חכם"
   | "צעצועים"

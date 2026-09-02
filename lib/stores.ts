@@ -5,10 +5,11 @@ export const STORE_FILTERS = [
   { slug: "amazon", label: "אמזון" },
   { slug: "aliexpress", label: "AliExpress" },
   { slug: "iherb", label: "iHerb" },
+  { slug: "shein", label: "SHEIN" },
 ] as const;
 
 export type StoreFilterSlug = (typeof STORE_FILTERS)[number]["slug"];
-export type StoreGroup = "amazon" | "aliexpress" | "iherb" | "other";
+export type StoreGroup = "amazon" | "aliexpress" | "iherb" | "shein" | "other";
 
 function storeHaystack(deal: Deal): string {
   return [deal.store, deal.storeName, deal.storeUrl, deal.affiliateUrl]
@@ -23,7 +24,7 @@ function storeLabelHaystack(deal: Deal): string {
 
 export function parseStoreFilter(value?: string | string[]): StoreFilterSlug {
   const raw = Array.isArray(value) ? value[0] : value;
-  if (raw === "amazon" || raw === "aliexpress" || raw === "iherb") {
+  if (raw === "amazon" || raw === "aliexpress" || raw === "iherb" || raw === "shein") {
     return raw;
   }
   return "all";
@@ -45,6 +46,9 @@ export function storeGroup(deal: Deal): StoreGroup {
   }
   if (hay.includes("iherb")) {
     return "iherb";
+  }
+  if (hay.includes("shein")) {
+    return "shein";
   }
   return "other";
 }
