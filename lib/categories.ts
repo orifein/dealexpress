@@ -15,6 +15,8 @@ export const categoryLabelsHe: Record<string, string> = {
   "צעצועים": "צעצועים",
   "גיימינג": "גיימינג",
   "לגו": "לגו",
+  music: "מוזיקה",
+  "מוזיקה": "מוזיקה",
 };
 
 export const categorySlugs: Record<string, string> = {
@@ -32,6 +34,8 @@ export const categorySlugs: Record<string, string> = {
   "צעצועים": "toys",
   "גיימינג": "gaming",
   "לגו": "toys",
+  music: "music",
+  "מוזיקה": "music",
 };
 
 export const categoryOrder: DealCategory[] = [
@@ -44,6 +48,7 @@ export const categoryOrder: DealCategory[] = [
   "home-kitchen",
   "sport-watch",
   "accessories",
+  "music",
 ];
 
 export function categoryLabel(category: string): string {

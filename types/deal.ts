@@ -12,7 +12,9 @@ export type DealCategory =
   | "ספורט / שעון חכם"
   | "צעצועים"
   | "גיימינג"
-  | "לגו";
+  | "לגו"
+  | "music"
+  | "מוזיקה";
 
 export type OriginalPrice = {
   amount: number;

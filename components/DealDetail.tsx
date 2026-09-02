@@ -33,11 +33,20 @@ export function DealDetail({ deal }: { deal: Deal }) {
         </section>
       ) : null}
       {warnings.length > 0 ? (
-        <section>
-          <h2 className="mb-4 text-2xl font-bold text-navy">שימו לב</h2>
+        <section className="rounded-2xl border border-brand/40 bg-card px-5 py-5">
+          <h2 className="mb-4 text-2xl font-bold text-brand">שימו לב</h2>
           <ul className="list-disc space-y-2 pe-5 text-lg">
             {warnings.map((item) => (
-              <li key={item}>{item}</li>
+              <li
+                key={item}
+                className={
+                  /retourenkauf|used like new/i.test(item)
+                    ? "font-semibold text-brand"
+                    : undefined
+                }
+              >
+                {item}
+              </li>
             ))}
           </ul>
         </section>
