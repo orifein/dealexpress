@@ -38,6 +38,3 @@
 - shein-pet-steel-elevated-bowl
 - nicewell-digital-kitchen-scale-10kg
 - alpha-grillers-meat-thermometer
-- zulay-kitchen-milk-frother
-- amazon-basics-50pack-velvet-hangers
-- upsimples-picture-frame-28x35
