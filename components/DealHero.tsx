@@ -4,6 +4,7 @@ import { StoreCta } from "@/components/StoreCta";
 import { categoryLabel } from "@/lib/categories";
 import { formatDateHe } from "@/lib/format";
 import { resolvePriceKind } from "@/lib/pricing";
+import { storeGroup } from "@/lib/stores";
 import type { Deal } from "@/types/deal";
 
 export function DealHero({ deal }: { deal: Deal }) {
@@ -50,6 +51,11 @@ export function DealHero({ deal }: { deal: Deal }) {
         {resolvePriceKind(deal) === "landed" && deal.shippingNoteHe ? (
           <p className="rounded-xl bg-card px-4 py-3 text-sm text-muted">
             {deal.shippingNoteHe}
+          </p>
+        ) : null}
+        {resolvePriceKind(deal) === "landed" && storeGroup(deal) === "amazon" ? (
+          <p className="text-sm text-muted">
+            משלוח חינם זמין אם ההזמנה שלכם באמזון עוברת $49 (בפריטים נבחרים).
           </p>
         ) : null}
         <StoreCta deal={deal} />
