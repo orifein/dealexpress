@@ -41,3 +41,5 @@
 - biodance-bio-collagen-mask
 - letsjoli-pushup-bra
 - letsjoli-strapless-bandeau-bra
+- head-evo-speed-padel-racket
+- babolat-air-vertuo-25-padel-racket
