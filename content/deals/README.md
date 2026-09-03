@@ -38,3 +38,5 @@
 - shein-pet-steel-elevated-bowl
 - nicewell-digital-kitchen-scale-10kg
 - alpha-grillers-meat-thermometer
+- biodance-bio-collagen-mask
+- letsjoli-pushup-bra
