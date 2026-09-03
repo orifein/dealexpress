@@ -4,7 +4,6 @@ import { StoreCta } from "@/components/StoreCta";
 import { categoryLabel } from "@/lib/categories";
 import { formatDateHe } from "@/lib/format";
 import { resolvePriceKind } from "@/lib/pricing";
-import { storeGroup } from "@/lib/stores";
 import type { Deal } from "@/types/deal";
 
 export function DealHero({ deal }: { deal: Deal }) {
@@ -53,7 +52,7 @@ export function DealHero({ deal }: { deal: Deal }) {
             {deal.shippingNoteHe}
           </p>
         ) : null}
-        {resolvePriceKind(deal) === "landed" && storeGroup(deal) === "amazon" ? (
+        {resolvePriceKind(deal) === "landed" && deal.freeShippingOver49 === true ? (
           <p className="text-sm text-muted">
             משלוח חינם זמין אם ההזמנה שלכם באמזון עוברת $49 (בפריטים נבחרים).
           </p>

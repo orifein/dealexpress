@@ -51,6 +51,7 @@ export type Deal = {
   itemOnly?: boolean;
   itemId?: string;
   landedIlsEstimated?: boolean;
+  freeShippingOver49?: boolean;
   couponCode?: string | null;
   badges?: string[];
   expiresAt?: string | null;
