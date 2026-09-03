@@ -19,7 +19,9 @@ export type DealCategory =
   | "אוזניות"
   | "סוללות"
   | "לרכב"
-  | "תוספי תזונה";
+  | "תוספי תזונה"
+  | "pets"
+  | "חיות מחמד";
 
 export type OriginalPrice = {
   amount: number;
