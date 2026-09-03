@@ -40,3 +40,4 @@
 - alpha-grillers-meat-thermometer
 - biodance-bio-collagen-mask
 - letsjoli-pushup-bra
+- letsjoli-strapless-bandeau-bra
