@@ -36,3 +36,5 @@
 - cococare-cracked-heel-repair
 - aliexpress-wood-handle-cheese-grater
 - shein-pet-steel-elevated-bowl
+- nicewell-digital-kitchen-scale-10kg
+- alpha-grillers-meat-thermometer
