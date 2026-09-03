@@ -19,10 +19,12 @@ The **Supervisor** is not a separate file — it's whichever Claude session runs
 | `qa` | last gate — links, tags, dupes, schema | `QA_RESULT: PASS/FAIL` |
 | `marketing` | commits, pushes, posts Telegram + Facebook | `PUBLISHED` |
 
-## Approval gate (current policy)
+## Approval gate (current policy: autonomous, as of 2026-09-03)
 
-`Hunter → Pricing → Content → Site → QA` runs fully autonomously — nothing is public yet at that point, so no approval needed. On a QA `FAIL`, the Supervisor routes the issues back to `site` or `content` instead of proceeding.
+The full pipeline runs autonomously, end to end: `Hunter → Pricing → Content → Site → QA → Marketing`. On a QA `FAIL`, the Supervisor routes issues back to `site`/`content` instead of proceeding. On a QA `PASS`, `marketing` publishes immediately — no human approval step. (An earlier, more conservative version of this policy required Ori's sign-off per deal before Marketing ran; that was deliberately relaxed after one supervised dry run proved the pipeline out, and Ori asked for everything to run on schedules with no further prompting.)
 
-On a QA `PASS`, the Supervisor **stops and shows Ori a one-glance summary per deal** — title, price, and the actual Telegram/Facebook post text — and waits for explicit approval before calling `marketing`. This is deliberate: the pipeline is new and unproven, and Marketing posts to a public Facebook group and the Telegram channel, which isn't worth automating blind on day one.
+**Facebook is the one piece not yet fully autonomous**: no browser tool exists in a scheduled/cloud run, so `marketing` queues the post to `content/facebook/pending.json` instead of posting it directly. An interactive session (with a live logged-in browser) posts the queue and records it in `content/facebook/posted.json`. This is a bridge until Facebook posting itself is automated (tracked as follow-up work).
 
-Once a track record builds up, this gate can be relaxed to autonomous QA-pass-only publishing — that's a decision for Ori to make explicitly, not something the Supervisor should assume on its own.
+## Scheduled routine
+
+A single Claude Code routine ("DealExpress Supervisor pipeline") runs this whole chain on a cron schedule, replacing the two older, simpler routines ("DealExpress deal sourcing" and "DealExpress Telegram poster" — now disabled). See https://claude.ai/code/routines for the live routine list.
