@@ -28,3 +28,9 @@ The full pipeline runs autonomously, end to end: `Hunter → Pricing → Content
 ## Scheduled routine
 
 A single Claude Code routine ("DealExpress Supervisor pipeline") runs this whole chain on a cron schedule, replacing the two older, simpler routines ("DealExpress deal sourcing" and "DealExpress Telegram poster" — now disabled). See https://claude.ai/code/routines for the live routine list.
+
+## Known hazard: Telegram dedup relies on a git-tracked file that can go stale
+
+`content/telegram/posted.json` is the only thing `scripts/telegram-post.js` checks before re-sending a deal. It is not authoritative against the real channel — it's just a file, and more than one process writes to it: the scheduled Supervisor routine, and a separate, external "Grok bot" automation that also posts to `@dealexpress_il` outside this pipeline entirely. Any session/branch whose copy of this file is behind `main` will think an already-posted deal is new and re-post it — a real, visible duplicate on the live channel, not a harmless no-op. This happened for real on 2026-09-04 (an interactive session running on a long-lived feature branch re-sent several already-posted deals before being caught and stopped).
+
+Rule: **always sync with `main` (fetch + merge/rebase) immediately before running `scripts/telegram-post.js`**, in any session, scheduled or interactive. If you're triaging a suspected duplicate, `git diff <your-branch> origin/main -- content/telegram/posted.json` will show you what your branch was missing. See `.claude/agents/marketing.md` for the full checklist.
