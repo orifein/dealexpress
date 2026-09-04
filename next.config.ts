@@ -32,6 +32,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "img.ltwebstatic.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.cycplus.com",
+        pathname: "/cdn/shop/**",
+      },
     ],
   },
 };
