@@ -25,10 +25,11 @@ const SITE_BASE_URL = process.env.SITE_BASE_URL || "https://www.dealexpress.co.i
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
 function parseArgs(argv) {
-  const args = { max: 5, gapSeconds: 120 };
+  const args = { max: 5, gapSeconds: 120, slugs: null };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--max") args.max = Number(argv[++i]);
     if (argv[i] === "--gap-seconds") args.gapSeconds = Number(argv[++i]);
+    if (argv[i] === "--slugs") args.slugs = argv[++i].split(",").map((s) => s.trim());
   }
   return args;
 }
@@ -220,15 +221,22 @@ async function main() {
     process.exit(1);
   }
 
-  const { max, gapSeconds } = parseArgs(process.argv.slice(2));
+  const { max, gapSeconds, slugs } = parseArgs(process.argv.slice(2));
   const deals = loadDeals();
   const state = loadState();
   const posted = new Set(state.map((s) => s.slug));
 
-  const pending = pickMixedByStore(
-    deals.filter((d) => !posted.has(d.slug)),
-    max,
-  );
+  const pending = slugs
+    ? slugs.map((slug) => {
+        const deal = deals.find((d) => d.slug === slug);
+        if (!deal) throw new Error(`Unknown slug: ${slug}`);
+        if (posted.has(slug)) throw new Error(`Already posted, refusing to duplicate: ${slug}`);
+        return deal;
+      })
+    : pickMixedByStore(
+        deals.filter((d) => !posted.has(d.slug)),
+        max,
+      );
 
   if (pending.length === 0) {
     console.log("No new deals to post.");
