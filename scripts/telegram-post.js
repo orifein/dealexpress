@@ -110,6 +110,8 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;");
 }
 
+const PRICE_TIMING_NOTE = "⏰ המחיר נכון למועד פרסום ההודעה ועשוי להשתנות אצל הספק - יש לבדוק בקופה לפני הרכישה.";
+
 function caption(deal) {
   const lines = [
     `<b>${escapeHtml(deal.title)}</b>`,
@@ -117,6 +119,7 @@ function caption(deal) {
     deal.store ? `🛒 ${escapeHtml(deal.store)}` : null,
     deal.priceLine ? `💰 ${escapeHtml(deal.priceLine)}` : null,
     deal.shippingNote ? `🚚 ${escapeHtml(deal.shippingNote)}` : null,
+    PRICE_TIMING_NOTE,
   ].filter(Boolean);
   return lines.join("\n");
 }
