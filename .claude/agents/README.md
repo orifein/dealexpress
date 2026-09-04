@@ -30,6 +30,17 @@ Before Hunter sources anything new, `price-refresh` re-checks the live price of 
 
 Same discipline as everywhere else in this pipeline: never fabricate a price or a comparison, only ever use what was actually fetched or searched. See `.claude/agents/price-refresh.md` for the full logic.
 
+## Fetch fallback policy (as of 2026-09-04)
+
+`WebFetch` is still the default way any agent reads a page (product pages, Israel-comparison listings, link/image checks). When a fetch clearly fails because of bot detection, a CAPTCHA, or a JS wall — not because the listing is genuinely gone — and the **Browser Use** and/or **Bright Data** plugins are enabled for the session, fall back in this order before giving up on that page:
+
+1. **Bright Data** (Web Unlocker/scrape) — a near drop-in replacement for a blocked `WebFetch`: URL in, content out, with built-in bot-detection/CAPTCHA bypass. Try this first; it's cheaper and faster than driving a real browser.
+2. **Browser Use** (cloud browser) — only if Bright Data also can't get through. This drives an actual browser session turn-by-turn, which costs more time/tokens, so it's reserved for pages that genuinely need real interaction or that Bright Data's unlocker still can't pass.
+
+If neither plugin is enabled for the session (check your available tools), keep the pre-2026-09-04 behavior exactly as documented in each agent file: never guess — skip the item/page and log why (e.g. `page blocked/captcha, no fallback tool available`) rather than fabricate a price, image, or link status.
+
+This applies to `deal-hunter`, `price-refresh`, and `qa` — see each file for where it plugs into their existing "can't verify → skip, don't guess" logic.
+
 ## Approval gate (current policy: autonomous, as of 2026-09-03)
 
 The full pipeline runs autonomously, end to end: `Price-Refresh → Hunter → Pricing → Content → Site → QA → Marketing`. On a QA `FAIL`, the Supervisor routes issues back to `site`/`content` instead of proceeding. On a QA `PASS`, `marketing` publishes immediately — no human approval step. (An earlier, more conservative version of this policy required Ori's sign-off per deal before Marketing ran; that was deliberately relaxed after one supervised dry run proved the pipeline out, and Ori asked for everything to run on schedules with no further prompting.)
