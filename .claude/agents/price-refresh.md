@@ -1,7 +1,7 @@
 ---
 name: price-refresh
 description: Re-verifies the live price of every already-published real deal against its actual source, before Hunter sources anything new. Updates prices that changed, removes deals that stopped being cheaper than Israel, leaves everything else untouched. Use at the very start of a Supervisor pipeline run, before deal-hunter.
-tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch, Skill
+tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch, Skill, mcp__browser-use__browser_navigate, mcp__browser-use__browser_get_state, mcp__browser-use__browser_extract_content, mcp__browser-use__browser_scroll, mcp__browser-use__browser_close_session
 model: sonnet
 ---
 
@@ -13,8 +13,8 @@ Check the `brightdata-dealexpress` skill before step 2's re-fetch: `brightdata-p
 
 1. List every real deal: `content/deals/*.json` where `demo: false` (skip `demo: true` — those are examples, never touch them).
 2. For each one, re-fetch its actual source page (the plain product URL — strip your own affiliate params if needed, or fetch the `affiliateUrl` as-is, either works as long as you land on the real product page) and read the **current** price exactly the way Hunter/Pricing would — never estimate, never carry over a stale number.
-   - If you can't reliably determine the current price (page blocked/captcha, listing gone, layout you can't parse), **leave that deal untouched and log why** — do not guess, do not remove it just because you couldn't check it this run.
-   - **Fetch fallback (see `.claude/agents/README.md`)**: if the page is blocked by bot detection/a CAPTCHA specifically (not a genuinely dead listing), and Bright Data and/or Browser Use are enabled for this session, retry with Bright Data first, then Browser Use if that also fails, before falling back to "leave untouched and log why."
+   - **Fetch fallback (see `.claude/agents/README.md` and the `brightdata-dealexpress` skill)**: if WebFetch can't reliably determine the current price because the page is blocked/CAPTCHA'd (not a genuinely dead listing), retry with `brightdata-plugin:scrape`/`price-comparison` first. If that also fails and `mcp__browser-use__*` tools are actually in your tool list, retry once more with `browser_navigate` + `browser_get_state`/`browser_extract_content` — a real rendered browser gets past a lot of what static WebFetch and Bright Data's unlocker can't. Still read the price exactly as shown, never estimate. `browser_close_session` when you're done with that page.
+   - If it's still unreadable after all of that (or none of the fallback tools are available, or the listing is genuinely gone), **leave that deal untouched and log why** — do not guess, do not remove it just because you couldn't check it this run.
 3. Compare the freshly-fetched price to what's stored (`itemIls`/`landedIls`/`originalPrice`, converting with a current defensible rate the same way Pricing would, stating the rate and date). Then:
    - **No real change** (same price, or a trivial rounding difference) → leave it alone completely. Don't touch the file, don't re-commit it, nothing.
    - **Price changed**, and the deal has (or you can freshly source) a real Israel-market comparison price (`compareIls`, or search `site:zap.co.il` / `site:ksp.co.il` / `site:ivory.co.il` / general Hebrew search the same way Pricing does):
