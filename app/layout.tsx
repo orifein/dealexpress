@@ -34,7 +34,10 @@ export const metadata: Metadata = {
     description: site.descriptionHe,
   },
   verification: {
-    google: "a1ECgw5ZDAZxfkQkpfRXPlFwMNgTij0UGZtj3OawNyU",
+    google: [
+      "a1ECgw5ZDAZxfkQkpfRXPlFwMNgTij0UGZtj3OawNyU",
+      "9cDmurS5uLJFvRUXR_IdUuUCEDGEQlWMwUjezKwnauA",
+    ],
   },
   icons: {
     icon: [
