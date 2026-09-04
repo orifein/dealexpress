@@ -10,7 +10,7 @@
  * fallback chain in lib/deals.ts so every deal renders correctly regardless
  * of which fields the file actually has.
  *
- * Usage: TELEGRAM_BOT_TOKEN=xxx node scripts/telegram-post.js [--max 5] [--gap-seconds 120]
+ * Usage: TELEGRAM_BOT_TOKEN=xxx node scripts/telegram-post.js [--max 5] [--gap-seconds 300] [--slugs slug-a,slug-b]
  */
 
 const fs = require("fs");
@@ -25,7 +25,7 @@ const SITE_BASE_URL = process.env.SITE_BASE_URL || "https://www.dealexpress.co.i
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
 function parseArgs(argv) {
-  const args = { max: 5, gapSeconds: 120, slugs: null };
+  const args = { max: 5, gapSeconds: 300, slugs: null };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--max") args.max = Number(argv[++i]);
     if (argv[i] === "--gap-seconds") args.gapSeconds = Number(argv[++i]);

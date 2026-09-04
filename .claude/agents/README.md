@@ -5,13 +5,14 @@ Mirrors the team GrokBot ran (Hunter, Pricing, Content, Site, QA, Marketing, wit
 ## Pipeline (sequential)
 
 ```
-Hunter → Pricing → Content → Site → QA → Marketing
+Price-Refresh → Hunter → Pricing → Content → Site → QA → Marketing
 ```
 
 The **Supervisor** is not a separate file — it's whichever Claude session runs the pipeline (the scheduled cron routine, or you talking to Claude directly). It calls each agent in order and passes the previous agent's structured output forward as the next agent's input. You talk to the Supervisor; you don't need to message the sub-agents individually — same as GrokBot's setup.
 
 | Agent | Job | Hands off |
 |---|---|---|
+| `price-refresh` | re-checks every published deal's live price before anything new is sourced | `PRICE_REFRESH_RESULT` |
 | `deal-hunter` | finds candidates | `CANDIDATE` blocks |
 | `pricing` | landed ILS + affiliate tags | `PRICED` blocks |
 | `content` | all copy (site + Telegram + Facebook), one voice | `COPY` blocks |
@@ -19,12 +20,28 @@ The **Supervisor** is not a separate file — it's whichever Claude session runs
 | `qa` | last gate — links, tags, dupes, schema | `QA_RESULT: PASS/FAIL` |
 | `marketing` | commits, pushes, posts Telegram + Facebook | `PUBLISHED` |
 
+## Price-Refresh policy (as of 2026-09-04)
+
+Before Hunter sources anything new, `price-refresh` re-checks the live price of every already-published real deal against its actual source:
+- **Price unchanged** → deal stays exactly as-is, untouched.
+- **Price changed, still cheaper than a real Israel-market price** → update the price on the site, deal stays live.
+- **Price changed, no longer cheaper than a real Israel-market price** → deal is removed from the site (it's not a deal anymore).
+- **Price changed, no Israel equivalent exists at all** → just update the price, deal stays live regardless of direction (there's nothing local to have stopped beating).
+
+Same discipline as everywhere else in this pipeline: never fabricate a price or a comparison, only ever use what was actually fetched or searched. See `.claude/agents/price-refresh.md` for the full logic.
+
 ## Approval gate (current policy: autonomous, as of 2026-09-03)
 
-The full pipeline runs autonomously, end to end: `Hunter → Pricing → Content → Site → QA → Marketing`. On a QA `FAIL`, the Supervisor routes issues back to `site`/`content` instead of proceeding. On a QA `PASS`, `marketing` publishes immediately — no human approval step. (An earlier, more conservative version of this policy required Ori's sign-off per deal before Marketing ran; that was deliberately relaxed after one supervised dry run proved the pipeline out, and Ori asked for everything to run on schedules with no further prompting.)
+The full pipeline runs autonomously, end to end: `Price-Refresh → Hunter → Pricing → Content → Site → QA → Marketing`. On a QA `FAIL`, the Supervisor routes issues back to `site`/`content` instead of proceeding. On a QA `PASS`, `marketing` publishes immediately — no human approval step. (An earlier, more conservative version of this policy required Ori's sign-off per deal before Marketing ran; that was deliberately relaxed after one supervised dry run proved the pipeline out, and Ori asked for everything to run on schedules with no further prompting.)
 
 **Facebook is the one piece not yet fully autonomous**: no browser tool exists in a scheduled/cloud run, so `marketing` queues the post to `content/facebook/pending.json` instead of posting it directly. An interactive session (with a live logged-in browser) posts the queue and records it in `content/facebook/posted.json`. This is a bridge until Facebook posting itself is automated (tracked as follow-up work).
 
 ## Scheduled routine
 
 A single Claude Code routine ("DealExpress Supervisor pipeline") runs this whole chain on a cron schedule, replacing the two older, simpler routines ("DealExpress deal sourcing" and "DealExpress Telegram poster" — now disabled). See https://claude.ai/code/routines for the live routine list.
+
+## Known hazard: Telegram dedup relies on a git-tracked file that can go stale
+
+`content/telegram/posted.json` is the only thing `scripts/telegram-post.js` checks before re-sending a deal. It is not authoritative against the real channel — it's just a file, and more than one process writes to it: the scheduled Supervisor routine, and a separate, external "Grok bot" automation that also posts to `@dealexpress_il` outside this pipeline entirely. Any session/branch whose copy of this file is behind `main` will think an already-posted deal is new and re-post it — a real, visible duplicate on the live channel, not a harmless no-op. This happened for real on 2026-09-04 (an interactive session running on a long-lived feature branch re-sent several already-posted deals before being caught and stopped).
+
+Rule: **always sync with `main` (fetch + merge/rebase) immediately before running `scripts/telegram-post.js`**, in any session, scheduled or interactive. If you're triaging a suspected duplicate, `git diff <your-branch> origin/main -- content/telegram/posted.json` will show you what your branch was missing. See `.claude/agents/marketing.md` for the full checklist.

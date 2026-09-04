@@ -48,3 +48,4 @@
 - idventure-cluebox-pro-sherlock
 - ayraviio-12x60-monocular-telescope
 - novium-hoverpen-dark-grey
+- aura-cacia-car-diffuser
