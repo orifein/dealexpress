@@ -40,6 +40,10 @@ The full pipeline runs autonomously, end to end: `Price-Refresh → Hunter → P
 
 A single Claude Code routine ("DealExpress Supervisor pipeline") runs this whole chain on a cron schedule, replacing the two older, simpler routines ("DealExpress deal sourcing" and "DealExpress Telegram poster" — now disabled). See https://claude.ai/code/routines for the live routine list.
 
+## Bright Data plugin, customized for this pipeline
+
+`price-refresh`, `deal-hunter`, `pricing`, and `qa` all now carry the `Skill` tool and check `.claude/skills/brightdata-dealexpress/SKILL.md` before falling back to plain `WebFetch`/`WebSearch`. That skill maps `brightdata-plugin`'s scraping/search/price-comparison skills onto this pipeline's specific stores (Amazon, AliExpress, iHerb, SHEIN) and specific pain points — `price-refresh`'s CAPTCHA-blocked "skipped, couldn't verify" cases, `deal-hunter`'s manual image-verification workaround, and the Israel-market comparison searches in `pricing`/`price-refresh`. It requires `brightdata-plugin` to be enabled for this project; every agent still has its original `WebFetch`/`WebSearch` fallback if it isn't.
+
 ## Known hazard: Telegram dedup relies on a git-tracked file that can go stale
 
 `content/telegram/posted.json` is the only thing `scripts/telegram-post.js` checks before re-sending a deal. It is not authoritative against the real channel — it's just a file, and more than one process writes to it: the scheduled Supervisor routine, and a separate, external "Grok bot" automation that also posts to `@dealexpress_il` outside this pipeline entirely. Any session/branch whose copy of this file is behind `main` will think an already-posted deal is new and re-post it — a real, visible duplicate on the live channel, not a harmless no-op. This happened for real on 2026-09-04 (an interactive session running on a long-lived feature branch re-sent several already-posted deals before being caught and stopped).
