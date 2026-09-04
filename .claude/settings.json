@@ -3,4 +3,15 @@
     "brightdata-plugin@claude-plugins-official": true,
     "browser-use@claude-plugins-official": true
   }
+  "mcpServers": {
+    "brightdata": {
+      "command": "npx",
+      "args": ["-y", "@brightdata/mcp"],
+      "env": {
+        "API_TOKEN": "$BRIGHT_DATA_API_TOKEN",
+        "PRO_MODE": "${PRO_MODE:-false}"
+      }
+    }
+  }
 }
+
