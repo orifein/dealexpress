@@ -21,7 +21,7 @@ const DEALS_DIR = path.join(ROOT, "content", "deals");
 const STATE_FILE = path.join(ROOT, "content", "telegram", "posted.json");
 
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID || "-1003973821208";
-const SITE_BASE_URL = process.env.SITE_BASE_URL || "https://dealexpress-live.vercel.app";
+const SITE_BASE_URL = process.env.SITE_BASE_URL || "https://www.dealexpress.co.il";
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
 function parseArgs(argv) {

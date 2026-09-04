@@ -44,3 +44,7 @@
 - head-evo-speed-padel-racket
 - babolat-air-vertuo-25-padel-racket
 - cosrx-snail-mucin-peptide-booster-set
+- huski-wine-cooler-champagne
+- idventure-cluebox-pro-sherlock
+- ayraviio-12x60-monocular-telescope
+- novium-hoverpen-dark-grey
