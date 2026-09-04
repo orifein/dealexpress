@@ -53,6 +53,10 @@ The full pipeline runs autonomously, end to end: `Price-Refresh → Hunter → P
 
 A single Claude Code routine ("DealExpress Supervisor pipeline") runs this whole chain on a cron schedule, replacing the two older, simpler routines ("DealExpress deal sourcing" and "DealExpress Telegram poster" — now disabled). See https://claude.ai/code/routines for the live routine list.
 
+## Per-agent model choice (as of 2026-09-04)
+
+This pipeline runs 3x/day, so token cost adds up. Agents doing mostly mechanical, rule-following work (`price-refresh`, `pricing`, `site`, `qa`) run on **Haiku**. Agents where output quality genuinely depends on judgment or fluency stay on **Sonnet**: `deal-hunter` (judging "unique/niche" vs. generic, avoiding near-duplicates is a fuzzy call), `content` (Hebrew copywriting quality), and `marketing` (posts to production — this is the stage that's already caused two real incidents, a duplicate Telegram post and a link going live before its merge, so it keeps the stronger model on its ordering logic). Revisit this split if a Haiku-run stage starts producing worse results than the token savings are worth.
+
 ## Bright Data plugin, customized for this pipeline
 
 `price-refresh`, `deal-hunter`, `pricing`, and `qa` all now carry the `Skill` tool and check `.claude/skills/brightdata-dealexpress/SKILL.md` before falling back to plain `WebFetch`/`WebSearch`. That skill maps `brightdata-plugin`'s scraping/search/price-comparison skills onto this pipeline's specific stores (Amazon, AliExpress, iHerb, SHEIN) and specific pain points — `price-refresh`'s CAPTCHA-blocked "skipped, couldn't verify" cases, `deal-hunter`'s manual image-verification workaround, and the Israel-market comparison searches in `pricing`/`price-refresh`. It requires `brightdata-plugin` to be enabled for this project; every agent still has its original `WebFetch`/`WebSearch` fallback if it isn't.

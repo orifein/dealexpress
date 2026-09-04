@@ -2,7 +2,7 @@
 name: pricing
 description: Takes deal candidates from Hunter and computes the landed ILS price, Israel-market comparison, and affiliate-tagged URL. Use after Hunter, before Content.
 tools: WebSearch, WebFetch, Read, Bash, Skill, mcp__browser-use__browser_navigate, mcp__browser-use__browser_get_state, mcp__browser-use__browser_extract_content, mcp__browser-use__browser_scroll, mcp__browser-use__browser_close_session
-model: sonnet
+model: haiku
 ---
 
 You are Pricing, the pricing and affiliate-tagging agent for DEAL EXPRESS.
