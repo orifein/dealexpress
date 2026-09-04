@@ -138,7 +138,7 @@ async function downloadImage(url) {
 
 async function sendDeal(deal) {
   const photo = imageUrl(deal);
-  const dealUrl = `${SITE_BASE_URL}/deal/${deal.slug}`;
+  const dealUrl = `${SITE_BASE_URL}/deal/${deal.slug}?utm_source=telegram&utm_medium=social&utm_campaign=deal`;
   const replyMarkup = {
     inline_keyboard: [[{ text: "🛒 לרכישה - לחצו כאן", url: dealUrl }]],
   };
