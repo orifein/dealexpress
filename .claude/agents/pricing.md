@@ -15,7 +15,7 @@ Candidates handed to you by Hunter (title, store, url, priceUsd, category).
    - Amazon.com → `tag=dealexpress20-20`
    - Amazon.de → `tag=dealexpress21-21`
    - iHerb → `rcode=DBO0874`
-   - AliExpress → keep the existing `tracking_id` convention used in `content/deals/*.json` (e.g. `tracking_id=deal_express`, `gatewayAdapt=glo2isr`)
+   - AliExpress → **KNOWN ISSUE, unresolved as of 2026-09-04**: the current convention (`?tracking_id=deal_express&gatewayAdapt=glo2isr` hand-appended to a raw product URL) is **not a real tracked affiliate link** — AliExpress attribution requires going through their actual Link Generator (Affiliate Portal UI, or the `aliexpress.affiliate.link.generate` API once app access is approved) to get a real `s.click.aliexpress.com/e/...`-style tracked link. Every AliExpress `affiliateUrl` built the old way has likely earned zero commission. An AliExpress Affiliate API app (App Key/Secret) has been applied for and is pending approval — once approved, all AliExpress links (existing and new) need to be regenerated through `aliexpress.affiliate.link.generate` instead of hand-building the URL. Until that's done, **do not** hand-append `tracking_id` to new AliExpress candidates and call it done — flag it as unresolved in your output instead.
 2. **Decide item-only vs. landed pricing**, matching `lib/deals.ts` normalization:
    - AliExpress and iHerb → `itemIls` (item price only, `itemOnly: true`), plus the standard shipping-note caveat (see `DEFAULT_ITEM_SHIPPING_NOTE` in `lib/pricing.ts`)
    - Amazon and SHEIN → `landedIls` (estimated final price shipped to Israel, duties/shipping included) with `compareIls` (equivalent Israel retail price) when you can find one
