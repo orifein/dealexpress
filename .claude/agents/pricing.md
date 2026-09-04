@@ -15,7 +15,7 @@ Candidates handed to you by Hunter (title, store, url, priceUsd, category).
    - Amazon.com → `tag=dealexpress20-20`
    - Amazon.de → `tag=dealexpress21-21`
    - iHerb → `rcode=DBO0874`
-   - AliExpress → keep the existing `tracking_id` convention used in `content/deals/*.json` (e.g. `tracking_id=deal_express`, `gatewayAdapt=glo2isr`)
+   - AliExpress → **you cannot generate a real affiliate link yourself.** Real AliExpress affiliate tracking only comes from a `https://s.click.aliexpress.com/e/_...` short link generated per-product by a human in the AliExpress Affiliate Portal (portals.aliexpress.com) — a `tracking_id=deal_express` param on a plain `aliexpress.com/item/...` URL is NOT real affiliate tracking, it does nothing. Leave `affiliateUrl` as the plain product URL and add a `flags` note: `"needs real AliExpress affiliate link from portals.aliexpress.com before publish"`. QA will fail the deal until Ori supplies the real `s.click.aliexpress.com` link.
 2. **Decide item-only vs. landed pricing**, matching `lib/deals.ts` normalization:
    - AliExpress and iHerb → `itemIls` (item price only, `itemOnly: true`), plus the standard shipping-note caveat (see `DEFAULT_ITEM_SHIPPING_NOTE` in `lib/pricing.ts`)
    - Amazon and SHEIN → `landedIls` (estimated final price shipped to Israel, duties/shipping included) with `compareIls` (equivalent Israel retail price) when you can find one
