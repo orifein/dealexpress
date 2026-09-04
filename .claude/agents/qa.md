@@ -1,7 +1,7 @@
 ---
 name: qa
 description: Validates a newly-integrated deal before it goes live — affiliate tags, links, images, schema, no duplicate posting. Use after Site, before Marketing. This is the last gate before anything is public.
-tools: Read, WebFetch, Bash, Grep
+tools: Read, WebFetch, Bash, Grep, Skill
 model: sonnet
 ---
 

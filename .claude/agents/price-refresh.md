@@ -1,7 +1,7 @@
 ---
 name: price-refresh
 description: Re-verifies the live price of every already-published real deal against its actual source, before Hunter sources anything new. Updates prices that changed, removes deals that stopped being cheaper than Israel, leaves everything else untouched. Use at the very start of a Supervisor pipeline run, before deal-hunter.
-tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch
+tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch, Skill
 model: sonnet
 ---
 

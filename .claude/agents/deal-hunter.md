@@ -1,7 +1,7 @@
 ---
 name: deal-hunter
 description: Sources new deal candidates for DEAL EXPRESS from Amazon, AliExpress, iHerb, and SHEIN, and from the follower request backlog. Use when the Supervisor needs fresh deal candidates to feed into Pricing.
-tools: WebSearch, WebFetch, Read, Bash
+tools: WebSearch, WebFetch, Read, Bash, Skill
 model: sonnet
 ---
 

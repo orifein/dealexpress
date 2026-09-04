@@ -39,7 +39,7 @@ Same discipline as everywhere else in this pipeline: never fabricate a price or 
 
 If neither plugin is enabled for the session (check your available tools), keep the pre-2026-09-04 behavior exactly as documented in each agent file: never guess — skip the item/page and log why (e.g. `page blocked/captcha, no fallback tool available`) rather than fabricate a price, image, or link status.
 
-This applies to `deal-hunter`, `price-refresh`, and `qa` — see each file for where it plugs into their existing "can't verify → skip, don't guess" logic.
+This applies to `deal-hunter`, `price-refresh`, and `qa` — see each file for where it plugs into their existing "can't verify → skip, don't guess" logic. Mechanically: Bright Data is invoked as a **skill** (e.g. `Skill({ skill: "brightdata-plugin:scrape" })`), so those three agent files carry `Skill` in their `tools:` allowlist. Browser Use is a separate **MCP server** — its exact tool name(s) weren't visible yet as of 2026-09-04 (no live session had it loaded), so it isn't yet in any subagent's `tools:` allowlist; add the real `mcp__browser-use__...` tool name there once it's been seen in an actual run, or that fallback step will silently be unreachable from inside a subagent even though the plugin is enabled account-wide.
 
 ## Approval gate (current policy: autonomous, as of 2026-09-03)
 
