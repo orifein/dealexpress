@@ -5,18 +5,18 @@ import { getAllDeals } from "@/lib/deals";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["", "/deals", "/about", "/privacy", "/terms", "/faq"].map(
     (path) => ({
-      url: `https://dealexpress-live.vercel.app${path}`,
+      url: `https://www.dealexpress.co.il${path}`,
       lastModified: new Date(),
     }),
   );
 
   const deals = getAllDeals().map((deal) => ({
-    url: `https://dealexpress-live.vercel.app/deal/${deal.slug}`,
+    url: `https://www.dealexpress.co.il/deal/${deal.slug}`,
     lastModified: new Date(deal.publishedAt),
   }));
 
   const categories = categoryOrder.map((slug) => ({
-    url: `https://dealexpress-live.vercel.app/category/${slug}`,
+    url: `https://www.dealexpress.co.il/category/${slug}`,
     lastModified: new Date(),
   }));
 

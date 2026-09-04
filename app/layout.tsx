@@ -11,7 +11,7 @@ const heebo = Heebo({
   subsets: ["hebrew", "latin"],
 });
 
-const SITE_URL = "https://dealexpress-live.vercel.app";
+const SITE_URL = "https://www.dealexpress.co.il";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
