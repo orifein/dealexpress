@@ -11,6 +11,7 @@ For steps 2-3 (link/image resolution), check the `brightdata-dealexpress` skill 
 
 ## What you check, for the deal file handed to you
 1. **Affiliate tag correctness** — re-verify against `README.md`'s rules (Amazon.com `dealexpress20-20`, Amazon.de `dealexpress21-21`, iHerb `rcode=DBO0874`). For **AliExpress**, `affiliateUrl` must be a real Affiliate Portal short link — host exactly `s.click.aliexpress.com`. A plain `aliexpress.com/item/...` URL, with or without a `tracking_id`/`gatewayAdapt` param, is **not** real affiliate tracking (that param does nothing for attribution — see `lib/affiliate.ts`) and must FAIL: `"AliExpress deal has no real affiliate link — needs a s.click.aliexpress.com link from portals.aliexpress.com, tracking_id param alone is not real tracking"`. This blocks the deal from reaching Marketing until Ori supplies the real link.
+   - **Don't let this candidate vanish** — this failure isn't something Content/Site can fix by retrying, so on this specific FAIL, also append it to `content/aliexpress-pending-links.json` (create as `[]` if the file doesn't exist yet; array of objects). Dedupe by `itemId` (or the plain product URL if no `itemId`) — don't add the same item twice across runs. Entry shape: `{slug, title, url: <plain aliexpress.com product url>, itemId, priceUsd, category, addedAt: <ISO timestamp>, status: "needs-link"}`. Report `pendingLinkAdded: yes/no` in your handback so the Supervisor can surface this list to Ori (supply a real portal link, or note the Affiliate API app is still pending approval) instead of the candidate just silently disappearing.
 2. **Link resolves** — fetch the `affiliateUrl`/`storeUrl`, confirm it doesn't 404 or redirect to a dead listing.
 3. **Image resolves** — fetch the `image` URL, confirm it's a real image response, not broken.
    - **Fetch fallback (see `.claude/agents/README.md` and the `brightdata-dealexpress` skill)**: if a check is inconclusive because WebFetch was blocked by bot detection/a CAPTCHA (not because the link/image is actually dead), retry with the Bright Data Web Unlocker curl call first. If that also fails and `mcp__browser-use__*` tools are actually in your tool list, retry once more with `browser_navigate` + `browser_get_state`/`browser_extract_content` (`browser_close_session` when done) before treating it as a real FAIL.
@@ -24,5 +25,6 @@ QA_RESULT
 slug: <slug>
 verdict: PASS | FAIL
 issues: [<list, empty if PASS>]
+pendingLinkAdded: yes/no (only relevant for the AliExpress-missing-affiliate-link FAIL — see above)
 ```
-On FAIL, be specific enough that Site or Content can fix it without re-deriving your findings. On PASS, the Supervisor sends this straight to Marketing.
+On FAIL, be specific enough that Site or Content can fix it without re-deriving your findings. On PASS, the Supervisor sends this straight to Marketing. On the AliExpress-missing-link FAIL specifically, tell the Supervisor not to retry Content/Site — it's queued in `content/aliexpress-pending-links.json` and needs Ori, not a copy fix.
