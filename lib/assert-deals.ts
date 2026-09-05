@@ -30,6 +30,8 @@ export const requiredRealSlugs = [
   "aeropress-go",
   "hario-v60-buono-1-2l",
   "subminimal-nanofoamer-v2",
+  "anker-nano-65w-3port",
+  "ugreen-uno-65w-robot",
 ] as const;
 
 export function missingRealDeals(): string[] {

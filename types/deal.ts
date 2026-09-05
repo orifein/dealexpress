@@ -24,7 +24,9 @@ export type DealCategory =
   | "pets"
   | "חיות מחמד"
   | "coffee"
-  | "קפה";
+  | "קפה"
+  | "chargers"
+  | "מטענים";
 
 export type OriginalPrice = {
   amount: number;
