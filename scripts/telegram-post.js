@@ -113,15 +113,19 @@ function escapeHtml(str) {
 const PRICE_TIMING_NOTE = "⏰ המחיר נכון למועד פרסום ההודעה ועשוי להשתנות אצל הספק - יש לבדוק בקופה לפני הרכישה.";
 
 function caption(deal) {
-  const lines = [
-    `<b>${escapeHtml(deal.title)}</b>`,
-    deal.summary ? escapeHtml(deal.summary) : null,
+  const infoLines = [
     deal.store ? `🛒 ${escapeHtml(deal.store)}` : null,
     deal.priceLine ? `💰 ${escapeHtml(deal.priceLine)}` : null,
     deal.shippingNote ? `🚚 ${escapeHtml(deal.shippingNote)}` : null,
+  ].filter(Boolean);
+
+  const blocks = [
+    `<b>${escapeHtml(deal.title)}</b>`,
+    deal.summary ? escapeHtml(deal.summary) : null,
+    infoLines.length ? infoLines.join("\n") : null,
     PRICE_TIMING_NOTE,
   ].filter(Boolean);
-  return lines.join("\n");
+  return blocks.join("\n\n");
 }
 
 async function downloadImage(url) {

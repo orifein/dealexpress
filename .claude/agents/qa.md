@@ -14,7 +14,7 @@ For steps 2-3 (link/image resolution), check the `brightdata-dealexpress` skill 
 2. **Link resolves** — fetch the `affiliateUrl`/`storeUrl`, confirm it doesn't 404 or redirect to a dead listing.
 3. **Image resolves** — fetch the `image` URL, confirm it's a real image response, not broken.
    - **Fetch fallback (see `.claude/agents/README.md` and the `brightdata-dealexpress` skill)**: if a check is inconclusive because WebFetch was blocked by bot detection/a CAPTCHA (not because the link/image is actually dead), retry with the Bright Data Web Unlocker curl call first. If that also fails and `mcp__browser-use__*` tools are actually in your tool list, retry once more with `browser_navigate` + `browser_get_state`/`browser_extract_content` (`browser_close_session` when done) before treating it as a real FAIL.
-4. **Schema sanity** — required fields present (`slug`, `titleHe`, `store`, `category`, `publishedAt`), price fields consistent with `priceKind` (item deals have `itemIls`, landed deals have `landedIls`).
+4. **Schema sanity** — required fields present (`slug`, `titleHe`, `store`, `category`, `publishedAt`), price fields consistent with `priceKind` (item deals have `itemIls`, landed deals have `landedIls`), and `originalPrice` (the USD/source-currency anchor, per `pricing`/`site`) is present — FAIL if it's missing rather than letting a ₪-only deal through.
 5. **No duplicate** — check `content/telegram/posted.json` and existing `content/deals/*.json` slugs to confirm this isn't a re-post of something already live or already queued.
 6. **Copy sanity** — no exposed internal notes, no broken Hebrew (mixed LTR/RTL glitches), price line matches the actual `itemIls`/`landedIls` value.
 

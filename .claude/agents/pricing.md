@@ -37,6 +37,8 @@ title: <as received>
 store: <as received>
 url: <affiliate-tagged URL>
 priceKind: item | landed
+priceUsd: <the original list price, as received from Hunter — pass it through, never drop it>
+originalCurrency: <USD | other, as received from Hunter>
 itemIls: <number, if priceKind=item>
 landedIls: <number, if priceKind=landed>
 compareIls: <number or omit>
@@ -44,4 +46,4 @@ fxRateUsed: <e.g. "1 USD = 3.7 ILS, 2026-09-03">
 category: <as received, or corrected>
 flags: <any concerns, or "none">
 ```
-Don't write copy and don't touch files — hand this straight back to the Supervisor for Content.
+**Always carry `priceUsd`/`originalCurrency` forward** — Hunter already found this figure, and every deal needs its original-currency source price stored alongside the derived ₪ figure, the same way Hunter reports it. Losing it here is why some live deals only have an ILS number with no USD anchor: Site can't write what you don't hand it, and Price-Refresh can't do an apples-to-apples "did the store's price actually change" comparison without it. Don't touch files — hand this straight back to the Supervisor for Content.
