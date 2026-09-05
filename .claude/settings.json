@@ -2,7 +2,7 @@
   "enabledPlugins": {
     "brightdata-plugin@claude-plugins-official": true,
     "browser-use@claude-plugins-official": true
-  }
+  },
   "mcpServers": {
     "brightdata": {
       "command": "npx",
