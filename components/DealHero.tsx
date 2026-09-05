@@ -4,6 +4,7 @@ import { StoreCta } from "@/components/StoreCta";
 import { categoryLabel } from "@/lib/categories";
 import { formatDateHe } from "@/lib/format";
 import { resolvePriceKind } from "@/lib/pricing";
+import { storeChipLabel } from "@/lib/stores";
 import type { Deal } from "@/types/deal";
 
 export function DealHero({ deal }: { deal: Deal }) {
@@ -33,9 +34,9 @@ export function DealHero({ deal }: { deal: Deal }) {
           <span className="rounded-full border border-line bg-card px-3 py-1 text-sm">
             {categoryLabel(deal.category)}
           </span>
-          {deal.storeName || deal.store ? (
+          {storeChipLabel(deal) ? (
             <span className="rounded-full border border-line bg-card px-3 py-1 text-sm">
-              {deal.storeName || deal.store}
+              {storeChipLabel(deal)}
             </span>
           ) : null}
           <span className="text-sm text-muted">{formatDateHe(deal.publishedAt)}</span>

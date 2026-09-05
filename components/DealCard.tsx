@@ -2,11 +2,12 @@ import Link from "next/link";
 import { DealImage } from "@/components/DealImage";
 import { PriceStack } from "@/components/PriceStack";
 import { categoryLabel } from "@/lib/categories";
+import { storeChipLabel } from "@/lib/stores";
 import type { Deal } from "@/types/deal";
 
 export function DealCard({ deal }: { deal: Deal }) {
   const href = `/deal/${deal.slug}`;
-  const storeLabel = deal.storeName || deal.store;
+  const storeLabel = storeChipLabel(deal);
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-card shadow-sm">

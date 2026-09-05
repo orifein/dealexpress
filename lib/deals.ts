@@ -23,6 +23,7 @@ type DealFile = Partial<Deal> & {
   itemOnly?: boolean;
   itemIls?: number;
   itemId?: string;
+  asin?: string;
   priceKind?: "item" | "landed";
   shippingNote?: string;
 };
@@ -80,6 +81,7 @@ function normalizeDeal(raw: DealFile): Deal {
     itemIls: raw.itemIls,
     itemOnly: raw.itemOnly === true ? true : undefined,
     itemId: raw.itemId,
+    asin: raw.asin,
     landedIlsEstimated: raw.landedIlsEstimated,
     couponCode: raw.couponCode ?? null,
     badges,

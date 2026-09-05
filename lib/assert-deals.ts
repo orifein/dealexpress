@@ -27,6 +27,8 @@ export const requiredRealSlugs = [
   "now-d3-k2-120",
   "cgn-d3-5000-90",
   "cgn-gold-c-1000-60",
+  "aeropress-go",
+  "hario-v60-buono-1-2l",
 ] as const;
 
 export function missingRealDeals(): string[] {

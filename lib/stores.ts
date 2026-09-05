@@ -30,6 +30,13 @@ export function parseStoreFilter(value?: string | string[]): StoreFilterSlug {
   return "all";
 }
 
+export function storeChipLabel(deal: Deal): string {
+  if (storeGroup(deal) === "amazon") {
+    return "אמזון";
+  }
+  return deal.storeName || deal.store || "";
+}
+
 export function storeGroup(deal: Deal): StoreGroup {
   const hay = storeHaystack(deal);
   const labels = ` ${storeLabelHaystack(deal)} `;

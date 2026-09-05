@@ -22,7 +22,9 @@ export type DealCategory =
   | "לרכב"
   | "תוספי תזונה"
   | "pets"
-  | "חיות מחמד";
+  | "חיות מחמד"
+  | "coffee"
+  | "קפה";
 
 export type OriginalPrice = {
   amount: number;
@@ -53,6 +55,7 @@ export type Deal = {
   itemIls?: number;
   itemOnly?: boolean;
   itemId?: string;
+  asin?: string;
   landedIlsEstimated?: boolean;
   freeShippingOver49?: boolean;
   couponCode?: string | null;
