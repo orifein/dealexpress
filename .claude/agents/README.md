@@ -18,7 +18,7 @@ The **Supervisor** is not a separate file — it's whichever Claude session runs
 | `content` | all copy (site + Telegram + Facebook), one voice | `COPY` blocks |
 | `site` | writes the deal JSON, keeps the build green | `INTEGRATED` |
 | `qa` | last gate — links, tags, dupes, schema | `QA_RESULT: PASS/FAIL` |
-| `marketing` | commits, pushes, posts Telegram + Facebook | `PUBLISHED` |
+| `marketing` | commits, pushes, posts Telegram + Facebook — for the whole batch of QA-passed deals at once (see "Batch merge policy" below), not one deal at a time | `PUBLISHED` |
 
 ## Price-Refresh policy (as of 2026-09-04)
 
@@ -48,6 +48,32 @@ The full pipeline runs autonomously, end to end: `Price-Refresh → Hunter → P
 **Facebook posting** uses the `browser-use` plugin (real Chrome or a Browser Use Cloud browser via MCP) when it's enabled for the session: `marketing` tries posting directly to the group, and only falls back to queuing the post to `content/facebook/pending.json` if the plugin isn't enabled, the browser session isn't actually logged into Facebook (a fresh cloud browser has no saved login), or the post attempt can't be confirmed. When it falls back, an interactive session (with a live logged-in browser, or `browser-use` pointed at Ori's own Chrome) posts the queue and records it in `content/facebook/posted.json`. See `.claude/agents/marketing.md` for the exact flow — the queue-file bridge stays as a permanent safety net even with `browser-use` available, not just a stopgap.
 
 **`browser-use` also unblocks two other things that used to need a manual/interactive session**, when the plugin is enabled: `deal-hunter` can source Amazon items over the old $75 cap by getting a real cart total with an Israeli delivery address (see `.claude/agents/deal-hunter.md`), and `price-refresh` can retry a page WebFetch couldn't read (blocked/captcha) with a real rendered browser (see `.claude/agents/price-refresh.md`). All three are pure fallback/enhancement — every agent checks whether the `mcp__browser-use__*` tools are actually present before attempting to use them, and every existing WebFetch/WebSearch-only path still works unchanged when the plugin isn't enabled.
+
+## Batch merge policy (as of 2026-09-06)
+
+Earlier runs merged each deal to `main` individually — Site integrates → QA validates → Marketing commits/pushes → Supervisor opens+merges a PR → confirms live → Marketing posts — repeated once per candidate. That's correct but slow: every candidate pays for its own full PR/merge/sync/build round-trip even when several candidates clear QA in the same run. As of 2026-09-06 the pipeline batches instead:
+
+1. **Site integrates every surviving candidate first**, one file each (parallel-safe — each candidate only touches its own `content/deals/<slug>.json`, plus `lib/categories.ts` only if a genuinely new category is needed). In batch mode Site skips its own full `npm run build`/`npm run lint` per file (see `.claude/agents/site.md`) — just a JSON-validity check — because running several full production builds concurrently has previously corrupted `node_modules`/`.next` (this happened for real on 2026-09-05 and cost ~15 minutes to diagnose and fix).
+2. **The Supervisor runs one consolidated `npm run build && npm run lint`** after every candidate in the batch has been written, catching anything Site's lightweight check missed.
+3. **QA validates each surviving candidate** (still one dispatch per candidate — QA is read-only and safe to parallelize; a FAIL still gets one fix-and-recheck round before that candidate is dropped, same as before).
+4. **Marketing stages every QA-`PASS`ed deal in one commit** and pushes once (see the "Batch publish policy" section of `.claude/agents/marketing.md`) — not one commit per deal.
+5. **The Supervisor opens and merges one PR for the whole batch**, confirms every file landed on `origin/main`, then Marketing (or the Supervisor) posts the whole batch to Telegram in **one** `telegram-post.js --slugs <slug1>,<slug2>,...` call (the script already accepts a comma-separated list, still spaced `--gap-seconds` apart) and handles Facebook per-deal in one dispatch.
+
+A candidate that fails QA twice is simply dropped from the batch before step 4 — it never blocks the rest of the batch from merging.
+
+### Why Marketing can't merge its own PRs here
+
+Confirmed 2026-09-05: the `marketing` (and `price-refresh`/`site`/`qa`) subagent sessions do **not** have GitHub MCP tools or the `gh` CLI available, even though the Supervisor session does. So in this environment, only the **Supervisor** can open/merge a PR — every subagent that needs a merge (any time its own branch isn't `main`) must commit, push, and hand back to the Supervisor rather than attempting `gh pr create`/`gh pr merge` itself. This is why the batch policy above routes all merging through the Supervisor rather than through Marketing directly.
+
+## Amazon floor: 3 per run, no exceptions (as of 2026-09-06)
+
+Ori wants **3 real Amazon links (US or DE, either counts) every run**, not just "2-3 as a target." `deal-hunter.md`'s store mix now lists this as a hard floor — Hunter should genuinely exhaust reasonable search effort on both Amazon.com and Amazon.de before handing back fewer than 3. The other stores (AliExpress, iHerb, SHEIN) stay soft targets — shift their share around based on what's actually verifiable that run.
+
+## Traffic signal from Vercel Web Analytics (as of 2026-09-06)
+
+The site already ships `@vercel/analytics` (see `app/layout.tsx`). `scripts/vercel-analytics.js` queries Vercel's public Web Analytics REST API (`GET https://api.vercel.com/v1/query/web-analytics/visits/count`, filtered per deal's `/deal/<slug>` path) to show which live deals are actually getting clicked, rolled up by store and category — `deal-hunter` checks this before sourcing (see `.claude/agents/deal-hunter.md`) as a soft signal to skew toward what's already working.
+
+**This requires `VERCEL_TOKEN` and `VERCEL_PROJECT_ID` to be set in the session environment** (a token from vercel.com/account/tokens, and the project id from the project's Vercel dashboard Settings page — add `VERCEL_TEAM_ID` too if the project lives under a team). Neither was configured as of 2026-09-06, so the script currently no-ops with a clear message rather than failing — same fallback discipline as `BRIGHT_DATA_API_TOKEN` being unset. Once Ori adds those two env vars, this starts working with no further code changes needed.
 
 ## Scheduled routine
 

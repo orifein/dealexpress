@@ -13,6 +13,15 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    // scripts/ are plain Node CommonJS utilities (package.json has no
+    // "type": "module"), so require() is the correct style here, not a
+    // TypeScript-project violation.
+    files: ["scripts/**/*.js"],
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;
