@@ -75,6 +75,18 @@ The site already ships `@vercel/analytics` (see `app/layout.tsx`). `scripts/verc
 
 **This requires `VERCEL_TOKEN` and `VERCEL_PROJECT_ID` to be set in the session environment** (a token from vercel.com/account/tokens, and the project id from the project's Vercel dashboard Settings page — add `VERCEL_TEAM_ID` too if the project lives under a team). Neither was configured as of 2026-09-06, so the script currently no-ops with a clear message rather than failing — same fallback discipline as `BRIGHT_DATA_API_TOKEN` being unset. Once Ori adds those two env vars, this starts working with no further code changes needed.
 
+## Facebook toggle (as of 2026-09-05)
+
+Facebook publishing is currently **off**: Ori disabled it site-wide, site + Telegram only until he says otherwise. This is a persistent flag in `content/config.json` (`facebookEnabled: false`), not a conversational note — since the scheduled routine starts a fresh session every run with no memory of past chat, the flag has to live in a file. `content/content.md` still writes a `facebookPost` for every deal (no functional change there), but `marketing.md` checks the flag first and skips Facebook entirely — no browser-use attempt, no queueing to `content/facebook/pending.json` — while it's `false`. Flip it to `true` in `content/config.json` when Ori wants Facebook back on; nothing else needs to change.
+
+## AliExpress pending-link queue (as of 2026-09-05)
+
+AliExpress is still fully in scope for `deal-hunter` to source. The blocker is downstream: until a real `s.click.aliexpress.com` portal link exists (hand-generated at portals.aliexpress.com, or once the pending AliExpress Affiliate API app is approved), `qa` fails any AliExpress deal whose `affiliateUrl` is just a plain product URL or a `tracking_id`-decorated one (confirmed non-functional for attribution). Retrying `content`/`site` can't fix this — only Ori supplying a real link, or the API coming through, can. So instead of the normal "fail twice → drop" loop, this specific failure gets queued to `content/aliexpress-pending-links.json` (see `.claude/agents/qa.md`) and dropped from that run's publish batch. The Supervisor's end-of-run report must list anything sitting in that file and explicitly ask Ori for links (or confirm the API is still pending) rather than letting AliExpress candidates just quietly disappear.
+
+## Competitor check (as of 2026-09-05)
+
+`deal-hunter` explicitly checks what the two direct competitors — ALIBUY (ali-buy.com, t.me/AliBuy4) and רעות תקני לי (reutbuyitforme.com) — are currently listing before finalizing candidates each run. A candidate either beats a competitor's current listing on price/shipping/coupon (direct match), or is a similar/adjacent item in the same niche that the competitor doesn't currently carry. This is a soft sourcing signal recorded in the candidate's `notes` field (see `.claude/agents/deal-hunter.md`), not a hard gate and not something referenced in public copy — `content` still writes its own voice, it doesn't name competitors in posts.
+
 ## Scheduled routine
 
 A single Claude Code routine ("DealExpress Supervisor pipeline") runs this whole chain on a cron schedule, replacing the two older, simpler routines ("DealExpress deal sourcing" and "DealExpress Telegram poster" — now disabled). See https://claude.ai/code/routines for the live routine list.

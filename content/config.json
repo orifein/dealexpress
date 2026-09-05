@@ -1,0 +1,4 @@
+{
+  "facebookEnabled": false,
+  "facebookEnabledNote": "Ori disabled Facebook publishing on 2026-09-05 (site + Telegram only until further notice). marketing.md checks this flag before attempting any Facebook post/queue. Flip to true when Ori says go again — see .claude/agents/README.md 'Facebook toggle'."
+}
