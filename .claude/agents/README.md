@@ -30,6 +30,12 @@ Before Hunter sources anything new, `price-refresh` re-checks the live price of 
 
 Same discipline as everywhere else in this pipeline: never fabricate a price or a comparison, only ever use what was actually fetched or searched. See `.claude/agents/price-refresh.md` for the full logic.
 
+**Rotation, as of 2026-09-06**: in practice the large majority of re-fetch attempts hit bot detection and come back "skipped, couldn't verify" every single run for the same deals — that's wasted fetch volume with no new information. `price-refresh` now only checks 1 of 3 catalog buckets per run (a deterministic, stateless split by slug + current time — see `.claude/agents/price-refresh.md` step 1a), so the full catalog still gets a real check once a day (this pipeline runs 3x/day) but each individual run's fetch volume drops by roughly two-thirds.
+
+## AliExpress sourcing gap (as of 2026-09-06)
+
+AliExpress product-detail pages are client-side-rendered — `window.runParams` is empty in the raw HTML both `WebFetch` and Bright Data's Web Unlocker return, so neither can read a real price there. This is structural, not a per-listing flake, and cost real time on 2026-09-05 when `deal-hunter` retried 5+ different AliExpress listings before giving up. `deal-hunter.md` now fails fast: confirm the gap once per run, then stop trying AliExpress via Bright Data/WebFetch and shift that store's slot elsewhere, unless `browser-use` is actually enabled (a real rendered browser can read CSR pages a raw fetch can't). This is the same root cause the Browser Use plugin would fix if it's ever enabled for this environment (see "Fetch fallback policy" above) — as of 2026-09-06 it is not installed/enabled (`ListPlugins` returns empty).
+
 ## Fetch fallback policy (as of 2026-09-04)
 
 `WebFetch` is still the default way any agent reads a page (product pages, Israel-comparison listings, link/image checks). When a fetch clearly fails because of bot detection, a CAPTCHA, or a JS wall — not because the listing is genuinely gone — fall back in this order before giving up on that page:
@@ -91,9 +97,11 @@ AliExpress is still fully in scope for `deal-hunter` to source. The blocker is d
 
 A single Claude Code routine ("DealExpress Supervisor pipeline") runs this whole chain on a cron schedule, replacing the two older, simpler routines ("DealExpress deal sourcing" and "DealExpress Telegram poster" — now disabled). See https://claude.ai/code/routines for the live routine list.
 
-## Per-agent model choice (as of 2026-09-04)
+## Per-agent model choice (as of 2026-09-06)
 
-This pipeline runs 3x/day, so token cost adds up. Agents doing mostly mechanical, rule-following work (`price-refresh`, `pricing`, `site`, `qa`) run on **Haiku**. Agents where output quality genuinely depends on judgment or fluency stay on **Sonnet**: `deal-hunter` (judging "unique/niche" vs. generic, avoiding near-duplicates is a fuzzy call), `content` (Hebrew copywriting quality), and `marketing` (posts to production — this is the stage that's already caused two real incidents, a duplicate Telegram post and a link going live before its merge, so it keeps the stronger model on its ordering logic). Revisit this split if a Haiku-run stage starts producing worse results than the token savings are worth.
+This pipeline runs 3x/day, so token cost/latency adds up. Agents doing mostly mechanical, rule-following work (`price-refresh`, `pricing`, `site`, `qa`, `marketing`) run on **Haiku**. Agents where output quality genuinely depends on judgment or fluency stay on **Sonnet**: `deal-hunter` (judging "unique/niche" vs. generic, avoiding near-duplicates is a fuzzy call) and `content` (Hebrew copywriting quality).
+
+`marketing` moved from Sonnet to Haiku on 2026-09-06: under the batch-merge policy above it no longer does its own PR merging or per-deal ordering judgment (the Supervisor handles merging), so its remaining job — git commit/push, running `telegram-post.js`, and following the very explicit Facebook browser-use steps in `marketing.md` — is mechanical enough for Haiku. The two real incidents that justified keeping it on Sonnet (a duplicate Telegram post, a link going live before its merge) were both sequencing bugs the batch policy and the Supervisor-side merge confirmation now structurally prevent, not judgment calls Sonnet was catching. **Revisit this if Haiku-run Marketing starts skipping steps or fumbling the Facebook browser-use flow** — that's the one place in this agent that still has some judgment in it (is this session actually logged in, did the post really appear).
 
 ## Bright Data Web Unlocker, customized for this pipeline (as of 2026-09-05)
 

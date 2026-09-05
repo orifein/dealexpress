@@ -12,7 +12,16 @@ Check the `brightdata-dealexpress` skill before step 2's re-fetch: it documents 
 ## What you do
 
 1. List every real deal: `content/deals/*.json` where `demo: false` (skip `demo: true` — those are examples, never touch them).
-2. For each one, re-fetch its actual source page (the plain product URL — strip your own affiliate params if needed, or fetch the `affiliateUrl` as-is, either works as long as you land on the real product page) and read the **current** price exactly the way Hunter/Pricing would — never estimate, never carry over a stale number.
+1a. **Rotate through the catalog instead of re-checking everything every run (as of 2026-09-06).** This pipeline runs 3x/day, and in practice the large majority of re-fetch attempts come back "blocked, couldn't verify" every single run for the same deals — that's wasted fetch volume for no new information. Split the catalog into 3 buckets and only check today's due bucket, so the full catalog still gets a real check attempt once per day (same freshness as before), just spread across the day's 3 runs instead of all of them piling into every run:
+   ```
+   bucket_due = floor(<current unix time in seconds> / 28800) % 3      # 28800s = 8h
+   ```
+   For each deal, compute its own bucket the same deterministic way (so every run agrees on which bucket a given slug is in without needing a shared state file):
+   ```
+   slug_bucket = (sum of the slug's character codes) % 3
+   ```
+   Only re-fetch deals where `slug_bucket == bucket_due` this run; leave every other deal completely untouched (don't even count it as "skipped" — it's simply not due this run, not a failed check). Note in your handback how many were in-scope vs. deferred to a later bucket this run.
+2. For each in-scope deal, re-fetch its actual source page (the plain product URL — strip your own affiliate params if needed, or fetch the `affiliateUrl` as-is, either works as long as you land on the real product page) and read the **current** price exactly the way Hunter/Pricing would — never estimate, never carry over a stale number.
    - **Fetch fallback (see `.claude/agents/README.md` and the `brightdata-dealexpress` skill)**: if WebFetch can't reliably determine the current price because the page is blocked/CAPTCHA'd (not a genuinely dead listing), retry with the Bright Data Web Unlocker curl call first. If that also fails and `mcp__browser-use__*` tools are actually in your tool list, retry once more with `browser_navigate` + `browser_get_state`/`browser_extract_content` — a real rendered browser gets past a lot of what static WebFetch and Bright Data's unlocker can't. Still read the price exactly as shown, never estimate. `browser_close_session` when you're done with that page.
    - If it's still unreadable after all of that (or none of the fallback tools are available, or the listing is genuinely gone), **leave that deal untouched and log why** — do not guess, do not remove it just because you couldn't check it this run.
 3. Compare the freshly-fetched price to what's stored (`itemIls`/`landedIls`/`originalPrice`, converting with a current defensible rate the same way Pricing would, stating the rate and date). Then:
@@ -22,13 +31,16 @@ Check the `brightdata-dealexpress` skill before step 2's re-fetch: it documents 
      - New price is **no longer cheaper** (equal or more expensive) than the Israel price → it's not a deal anymore. **Remove it**: delete `content/deals/<slug>.json`, remove its slug from `content/deals/README.md`'s real-deals list, and remove it from `lib/categories.ts` only if that category now has zero deals left (don't touch the category definition if other deals still use it). Leave `content/telegram/posted.json` and `content/facebook/posted.json` alone — they're a historical record of what was posted, not a live inventory list; don't rewrite history just because the deal came down later.
    - **Price changed**, and there is genuinely no Israel equivalent (no `compareIls` stored, and a fresh search still finds nothing comparable sold in Israel) → just update the price fields in place and keep it live regardless of direction. "Nothing comparable exists locally" means there's no local price to fall below, so a price increase alone isn't grounds for removal here — only a real, found Israeli price beating it is.
 4. Never fabricate a price, a "current" value, or an Israel comparison — everything here must come from an actual fetch/search result, exactly like Hunter and Pricing.
-5. After going through every real deal, run `npm run build` once to confirm nothing broke (a removal can occasionally orphan a category reference — fix it if so).
+5. After going through every in-scope deal (today's due bucket), run `npm run build` once to confirm nothing broke (a removal can occasionally orphan a category reference — fix it if so). Skip the build entirely if nothing in-scope actually changed (rare bucket with zero updates/removals) — nothing to verify.
 6. Commit your changes (updates and removals) in one batch, clear commit message per deal or a summary if there are several, and get it onto `main` the same way Marketing does: push your branch, and if that doesn't land directly on `main` (session-scoped to a different branch), open a PR and merge it via the GitHub API/CLI, then confirm on `origin/main` that your changes are really there. Don't skip this — a price fix nobody merges to `main` doesn't actually reach the live site.
 
 ## What you hand back
 
 ```
 PRICE_REFRESH_RESULT
+bucketDue: <0|1|2>
+inScope: <N>              (deals in today's due bucket)
+deferred: <N>              (deals in other buckets, not touched this run — not a failure, just not due)
 checked: <N>
 unchanged: <N>
 updated: [<slug>: <old price> -> <new price>, ...]
