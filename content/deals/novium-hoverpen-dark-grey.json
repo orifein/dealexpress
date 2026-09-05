@@ -10,7 +10,7 @@
   "imageAltHe": "עט novium Hoverpen עומד אנכית על מעמד, עם קופסת המתנה",
   "storeUrl": "https://www.amazon.com/dp/B09DKQZBCL?tag=dealexpress20-20",
   "storeName": "Amazon US",
-  "landedIls": 220,
+  "landedIls": 270.0,
   "shippingNoteHe": "משלוח חינם לישראל, ללא חיובי מכס או מע\"מ (מתחת לסף הפטור של 75$).",
   "summaryHe": "עט כדורי יוקרתי מתכת שעומד אנכית לבד על מעמד מגנטי, עם דיו זורם חופשי ברמה גבוהה - מגיע בקופסת מתנה מעוצבת. 4.6/5, מעל 650 ביקורות באמזון. לא נמצא משווק רשמי בישראל למוצר הזה - פריט נישה שלא תמצאו באתרי הדילים הגדולים.",
   "highlightsHe": [
@@ -22,5 +22,6 @@
     "לא זמין רשמית בישראל - פריט נישה"
   ],
   "publishedAt": "2026-09-04T10:35:00+03:00",
-  "featured": false
+  "featured": false,
+  "priceUsd": 72.0
 }

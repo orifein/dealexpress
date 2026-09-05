@@ -27,7 +27,6 @@
 - shein-gloweve-knit-top
 - shein-petite-linen-dress
 - shein-denim-vintage-tote-bag
-- adidas-samba-og-white-black-red
 - skechers-summits-high-range-slip-on
 - under-armour-charged-assert-10
 - brooks-adrenaline-gts-25

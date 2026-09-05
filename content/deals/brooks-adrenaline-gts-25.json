@@ -11,7 +11,7 @@
   "imageAltHe": "נעלי ריצה Brooks Adrenaline GTS 25 שחור",
   "storeUrl": "https://www.amazon.com/dp/B0DM3KHFJ3?tag=dealexpress20-20",
   "storeName": "Amazon US",
-  "landedIls": 587,
+  "landedIls": 577.12,
   "compareIls": 679,
   "shippingNoteHe": "מידה 10.5 רחב. המחיר הסופי כולל פריט (₪468.01) + משלוח חינם וחיובי יבוא (₪119.39) לישראל.",
   "summaryHe": "דגם הדגל התומך של Brooks, רב-מכר מס' 1 בנעלי ריצת כביש לגברים באמזון (4.5/5, 2,263 ביקורות, 300+ נקנו בחודש האחרון). המחיר הסופי בשקלים זול ב-13.5% מהמחיר הזול ביותר שנמצא בישראל (MotionLab, ₪679, מידה רחבה).",
@@ -22,5 +22,6 @@
     "13.5% זול יותר מהמחיר הזול ביותר בישראל (₪679)"
   ],
   "publishedAt": "2026-09-02T20:41:00+03:00",
-  "featured": false
+  "featured": false,
+  "priceUsd": 153.9
 }

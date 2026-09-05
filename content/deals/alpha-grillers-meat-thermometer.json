@@ -10,9 +10,12 @@
   "imageAltHe": "מד חום דיגיטלי לבשר Alpha Grillers עם תצוגה מוארת",
   "storeUrl": "https://www.amazon.com/dp/B00S93EQUK?tag=dealexpress20-20",
   "storeName": "Amazon US",
-  "landedIls": 93,
+  "landedIls": 59.93,
   "landedIlsEstimated": true,
-  "badges": ["בחירת Amazon", "25% הנחה"],
+  "badges": [
+    "בחירת Amazon",
+    "25% הנחה"
+  ],
   "shippingNoteHe": "המחיר הסופי כולל פריט (₪45.52, 25% הנחה ממחיר מחירון ₪60.79) ומשלוח לישראל (₪47.74), ללא חיובי יבוא.",
   "summaryHe": "מד חום דיגיטלי לבשר עם קריאה תוך 1-2 שניות, דירוג 4.8/5 מ-91,719 ביקורות ו-60,000+ שנקנו בחודש האחרון - אחד ממדי החום הנמכרים ביותר באמזון. עמיד במים (IP67), מכויל מראש ומוכן לשימוש מיידי. אביזר גריל וברביקיו קלאסי, מתנה מצוינת.",
   "highlightsHe": [
@@ -23,5 +26,6 @@
     "25% הנחה ממחיר המחירון של אמזון"
   ],
   "publishedAt": "2026-09-03T09:56:45+03:00",
-  "featured": true
+  "featured": true,
+  "priceUsd": 15.98
 }

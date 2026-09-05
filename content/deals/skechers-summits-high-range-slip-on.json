@@ -11,7 +11,7 @@
   "imageAltHe": "נעלי Skechers Summits High Range סליפ-און כחול",
   "storeUrl": "https://www.amazon.com/dp/B0B9BMZ6TC?tag=dealexpress20-20",
   "storeName": "Amazon US",
-  "landedIls": 242,
+  "landedIls": 206.25,
   "compareIls": 300,
   "shippingNoteHe": "בדקו מידה בדף המוצר לפני הזמנה. המחיר הסופי כולל פריט (₪167.26) + משלוח לישראל (₪75.08), ללא חיובי יבוא.",
   "summaryHe": "נעלי Slip-ins ללא שרוכים עם קצף זיכרון מקורר אוויר, רב-מכר מס' 1 בסניקרס אופנתיים לגברים באמזון (4.6/5, 27,858 ביקורות). המחיר הסופי בשקלים זול ב-19% מהמחיר הרשמי בישראל (Skechers Israel, ₪299.90).",
@@ -22,5 +22,6 @@
     "19% זול יותר מהמחיר הרשמי של Skechers ישראל (₪299.90)"
   ],
   "publishedAt": "2026-09-02T20:37:00+03:00",
-  "featured": false
+  "featured": false,
+  "priceUsd": 55.0
 }
